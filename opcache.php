@@ -29,7 +29,7 @@ class opcache_dashboard {
 	}
 
 	function add_admin_menu() {
-		add utility page(
+		add_utility_page(
 			__('OPcache Dashboard', 'opcache'),	//page_title
 			__('OPcache', 'opcache'),		//menu_title
 			'update_core',				//capability
