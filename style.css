@@ -1,0 +1,50 @@
+.postbox-container{
+	float:left
+}
+
+#widgets .meta-box-sortables {
+	margin: 0 8px;
+	min-height: 100px;
+}
+
+#widgets .postbox-container{
+	width:25%
+}
+
+#widgets-wrap{
+	overflow:hidden
+}
+
+@media only screen and (max-width:799px){
+	#wpbody-content #widgets .postbox-container{
+		width:100%
+	}
+}
+
+@media only screen and (min-width:800px) and (max-width:1499px){
+	#wpbody-content #widgets .postbox-container{
+		width:49.5%
+	}
+
+	#wpbody-content #widgets #postbox-container-2,
+	#wpbody-content #widgets #postbox-container-3,
+	#wpbody-content #widgets #postbox-container-4{
+		float:right;
+		width:50.5%
+	}
+}
+
+@media only screen and (min-width:1500px) and (max-width:1800px){
+	#wpbody-content #widgets .postbox-container{
+		width:33.5%
+	}
+
+	#wpbody-content #widgets #postbox-container-1{
+		width:33%
+	}
+
+	#wpbody-content #widgets #postbox-container-3,
+	#wpbody-content #widgets #postbox-container-4{
+		float:right
+	}
+}
