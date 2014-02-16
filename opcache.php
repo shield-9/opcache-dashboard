@@ -121,17 +121,23 @@ class opcache_dashboard {
 				keys:[<?php echo $stats['num_cached_keys']; ?>,<?php echo $stats['num_free_keys']; ?>,0],
 				hits:[<?php echo $stats['misses']; ?>,<?php echo $stats['hits']; ?>,0]
 			};
+			var mem_stats=[
+				'<?php echo $this->size($mem_stats['used_memory']); ?>',
+				'<?php echo $this->size($mem_stats['free_memory']); ?>',
+				'<?php echo $this->size($mem_stats['wasted_memory']); ?>',
+				'<?php echo $this->number_format($mem_stats['current_wasted_percentage'],2); ?>'
+			];
 
 			var width = 400;
 			var height = 400;
 			var radius = Math.min(width, height) / 2;
-			var colours = ['#B41F1F', '#1FB437', '#ff7f0e'];
+			var colors = ['#B41F1F', '#1FB437', '#ff7f0e'];
 
-			d3.scale.customColours = function() {
-				return d3.scale.ordinal().range(colours);
+			d3.scale.customColors = function() {
+				return d3.scale.ordinal().range(colors);
 			};
 
-			var colour = d3.scale.customColours();
+			var color = d3.scale.customColors();
 
 			var pie = d3.layout.pie()
 					.sort(null);
@@ -149,10 +155,10 @@ class opcache_dashboard {
 
 			var path = g.selectAll("path")
 					.data(pie(dataset.memory))
-					.enter().append("path")
-					.attr("fill", function(d, i) { return colour(i); })
-					.attr("d", arc)
-					.each(function(d) { this._current = d; }); // store the initial values
+					.enter()
+					.append("path")
+					.attr("fill", function(d, i) { return color(i); })
+			display();
 
 			d3.selectAll("input").on("change", change);
 
@@ -161,10 +167,10 @@ class opcache_dashboard {
 			function set_text(t) {
 				if(t=="memory") {
 					d3.select("#stats").html(
-						"<table><tr><th style='background:#B41F1F;'>Used</th><td><?php echo $this->size($mem_stats['used_memory']); ?></td></tr>"
-						+"<tr><th style='background:#1FB437;'>Free</th><td><?php echo $this->size($mem_stats['free_memory']); ?></td></tr>"
-						+"<tr><th style='background:#ff7f0e;' rowspan=\"2\">Wasted</th><td><?php echo$this->size($mem_stats['wasted_memory']); ?></td></tr>"
-						+"<tr><td><?php echo $this->number_format($mem_stats['current_wasted_percentage'],2); ?>%</td></tr></table>"
+						"<table><tr><th style='background:#B41F1F;'>Used</th><td>"+mem_stats[0]+"</td></tr>"
+						+"<tr><th style='background:#1FB437;'>Free</th><td>"+mem_stats[1]+"</td></tr>"
+						+"<tr><th style='background:#ff7f0e;' rowspan=\"2\">Wasted</th><td>"+mem_stats[2]+"</td></tr>"
+						+"<tr><td>"+mem_stats[3]+"%</td></tr></table>"
 					);
 				} else if(t=="keys") {
 					d3.select("#stats").html(
@@ -180,17 +186,26 @@ class opcache_dashboard {
 			}
 
 			function change(){
-				path=path.data(pie(dataset[this.value]));
-				path.transition().duration(750).attrTween("d",arcTween);
+				path=g.selectAll("path")
+					.data(pie(dataset[this.value]));
+				display();
 				set_text(this.value);
 			}
-
-			function arcTween(a){
-				var i=d3.interpolate(this._current,a);
-				this._current=i(0);
-				return function(t){
-					return arc(i(t));
-				};
+//http://codepen.io/pcostanz/pen/jpiHe
+//http://www.openspc2.org/reibun/D3.js/code/graph/pie-chart/1007/index.html
+//http://www.openspc2.org/reibun/D3.js/code/graph/pie-chart/1001/index.html
+			function display(){
+				path.transition()
+					.duration(1000)
+					.attrTween("d", function(d){
+						var interpolate = d3.interpolate(
+							{ startAngle : 0, endAngle : 0 },
+							{ startAngle : d.startAngle, endAngle : d.endAngle }
+						);
+						return function(t){
+							return arc(interpolate(t));
+						}
+					});
 			}
 		</script>
 		<?php
@@ -213,3 +228,4 @@ class opcache_dashboard {
 }
 
 ?>
+
