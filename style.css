@@ -11,6 +11,10 @@
 	width:25%
 }
 
+#widgets .postbox .hndle {
+	cursor:auto;
+}
+
 #widgets-wrap{
 	overflow:hidden
 }

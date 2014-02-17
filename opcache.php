@@ -21,12 +21,12 @@ class opcache_dashboard {
 	static $instance;
 
 	static function init() {
-		if ( ! self::$instance ) {
+		if(!self::$instance) {
 		/*
-			if ( did_action( 'plugins_loaded' ) )
+			if(did_action('plugins_loaded'))
 				self::plugin_textdomain();
 			else
-				add_action( 'plugins_loaded', array( __CLASS__, 'plugin_textdomain' ) );
+				add_action('plugins_loaded', array(__CLASS__, 'plugin_textdomain'));
 		*/
 
 			self::$instance = new opcache_dashboard;
@@ -44,6 +44,8 @@ class opcache_dashboard {
 	function register_assets() {
 		if(!wp_script_is('d3js', 'registered'))
 			wp_register_script('d3js', '//cdnjs.cloudflare.com/ajax/libs/d3/3.4.1/d3.min.js', false, '3.4.1');
+		if(!wp_script_is('opcache', 'registered'))
+			wp_register_script('opcache', plugin_dir_url(__FILE__).'chart.js', array('jquery', 'd3js'), '0.1.0', true);
 		if(!wp_style_is('opcache', 'registered'))
 			wp_register_style('opcache', plugin_dir_url(__FILE__).'style.css', false, '0.1.0');
 	}
@@ -65,7 +67,7 @@ class opcache_dashboard {
 	function admin_menu_assets($hook) {
 		if('toplevel_page_opcache' != $hook)
 			return;
-		wp_enqueue_script('d3js');
+		wp_enqueue_script('opcache');
 		wp_enqueue_style('opcache');
 	}
 
@@ -83,6 +85,9 @@ class opcache_dashboard {
 					<div id="postbox-container-1" class="postbox-container">
 						<div class="meta-box-sortables ui-sortable">
 							<div class="postbox">
+								<h3 class="hndle">
+									<span>PHP: <?php echo phpversion(); ?> and OPcache: <?php echo $config['version']['version']; ?></span>
+								</h3>
 								<div class="inside">
 									<p id="hits">Hits: <?php echo $this->number_format($stats['opcache_hit_rate'], 2); ?>%</p>
 									<p id="memory">
@@ -127,86 +132,6 @@ class opcache_dashboard {
 				'<?php echo $this->size($mem_stats['wasted_memory']); ?>',
 				'<?php echo $this->number_format($mem_stats['current_wasted_percentage'],2); ?>'
 			];
-
-			var width = 400;
-			var height = 400;
-			var radius = Math.min(width, height) / 2;
-			var colors = ['#B41F1F', '#1FB437', '#ff7f0e'];
-
-			d3.scale.customColors = function() {
-				return d3.scale.ordinal().range(colors);
-			};
-
-			var color = d3.scale.customColors();
-
-			var pie = d3.layout.pie()
-					.sort(null);
-
-			var arc = d3.svg.arc()
-					.innerRadius(radius - 20)
-					.outerRadius(radius - 50);
-
-			var svg = d3.select("#graph").append("svg")
-					.attr("width", width)
-					.attr("height", height);
-
-			var g = svg.append("g")
-					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-			var path = g.selectAll("path")
-					.data(pie(dataset.memory))
-					.enter()
-					.append("path")
-					.attr("fill", function(d, i) { return color(i); })
-			display();
-
-			d3.selectAll("input").on("change", change);
-
-			set_text("memory");
-
-			function set_text(t) {
-				if(t=="memory") {
-					d3.select("#stats").html(
-						"<table><tr><th style='background:#B41F1F;'>Used</th><td>"+mem_stats[0]+"</td></tr>"
-						+"<tr><th style='background:#1FB437;'>Free</th><td>"+mem_stats[1]+"</td></tr>"
-						+"<tr><th style='background:#ff7f0e;' rowspan=\"2\">Wasted</th><td>"+mem_stats[2]+"</td></tr>"
-						+"<tr><td>"+mem_stats[3]+"%</td></tr></table>"
-					);
-				} else if(t=="keys") {
-					d3.select("#stats").html(
-						"<table><tr><th style='background:#B41F1F;'>Cached keys</th><td>"+dataset[t][0]+"</td></tr>"+
-						"<tr><th style='background:#1FB437;'>Free Keys</th><td>"+dataset[t][1]+"</td></tr></table>"
-					);
-				} else if(t=="hits") {
-					d3.select("#stats").html(
-						"<table><tr><th style='background:#B41F1F;'>Misses</th><td>"+dataset[t][0]+"</td></tr>"+
-						"<tr><th style='background:#1FB437;'>Cache Hits</th><td>"+dataset[t][1]+"</td></tr></table>"
-					);
-				}
-			}
-
-			function change(){
-				path=g.selectAll("path")
-					.data(pie(dataset[this.value]));
-				display();
-				set_text(this.value);
-			}
-//http://codepen.io/pcostanz/pen/jpiHe
-//http://www.openspc2.org/reibun/D3.js/code/graph/pie-chart/1007/index.html
-//http://www.openspc2.org/reibun/D3.js/code/graph/pie-chart/1001/index.html
-			function display(){
-				path.transition()
-					.duration(1000)
-					.attrTween("d", function(d){
-						var interpolate = d3.interpolate(
-							{ startAngle : 0, endAngle : 0 },
-							{ startAngle : d.startAngle, endAngle : d.endAngle }
-						);
-						return function(t){
-							return arc(interpolate(t));
-						}
-					});
-			}
 		</script>
 		<?php
 	}
