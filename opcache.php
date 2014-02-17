@@ -79,7 +79,6 @@ class opcache_dashboard {
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
 		?>
 		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
-			<h3>PHP: <?php echo phpversion(); ?> and OPcache: <?php echo $config['version']['version']; ?></h3>
 			<div id="widgets-wrap">
 				<div id="widgets" class="metabox-holder">
 					<div id="postbox-container-1" class="postbox-container">
