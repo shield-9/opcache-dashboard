@@ -11,7 +11,7 @@ As you know, OPcache has no management page. This plugins offers you the OPcache
 	3. If not, please see [this document](http://php.net/book.opcache) and enable/install OPcache.
 
 ## Thanks
-For implementing this plugin, I refered for [OPcache Dashboard](https://github.com/carlosbuenosvinos/opcache-dashboard)([@buenosvinos](https://twitter.com/buenosvinos))
+For implementing this plugin, I referred to [OPcache Dashboard](https://github.com/carlosbuenosvinos/opcache-dashboard)([@buenosvinos](https://twitter.com/buenosvinos))
 
 ## License
 
