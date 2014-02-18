@@ -45,7 +45,9 @@ class opcache_dashboard {
 		if(!wp_script_is('d3js', 'registered'))
 			wp_register_script('d3js', '//cdnjs.cloudflare.com/ajax/libs/d3/3.4.1/d3.min.js', false, '3.4.1');
 		if(!wp_script_is('opcache', 'registered'))
-			wp_register_script('opcache', plugin_dir_url(__FILE__).'chart.js', array('jquery', 'd3js'), '0.1.0', true);
+			wp_register_script('opcache', plugin_dir_url(__FILE__).'js/chart.js', array('jquery', 'd3js'), '0.1.0', true);
+		if(!wp_script_is('jquery-center', 'registered'))
+			wp_register_script('jquery-center', plugin_dir_url(__FILE__).'js/jquery.center.min.js', array('jquery'), '1.1.1');
 		if(!wp_style_is('opcache', 'registered'))
 			wp_register_style('opcache', plugin_dir_url(__FILE__).'style.css', false, '0.1.0');
 	}
