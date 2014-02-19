@@ -266,7 +266,8 @@ $HISTORY_FILE
 $ASSETS_DIR
 .gitignore
 HOW-TO-RELEASE
-tools" "$SVNPATH"
+tools
+references" "$SVNPATH"
 
 echo "[Info] Changing directory to SVN and committing to trunk"
 cd $SVNPATH

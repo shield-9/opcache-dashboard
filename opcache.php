@@ -85,7 +85,7 @@ class OPcache_dashboard {
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
 
-		require_once('./class.list-table.php');
+		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
 		$list_table = new OPcache_List_Table($status['scripts']);
 		$list_table->prepare_items();
 		?>
@@ -150,7 +150,6 @@ class OPcache_dashboard {
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
 				<?php $list_table->display() ?>
 			</form>
-		<?php endif; ?>
 			
 		</div><!-- wrap -->
 		<script>
