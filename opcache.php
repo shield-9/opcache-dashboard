@@ -43,7 +43,7 @@ class opcache_dashboard {
 
 	function register_assets() {
 		if(!wp_script_is('d3js', 'registered'))
-			wp_register_script('d3js', '//cdnjs.cloudflare.com/ajax/libs/d3/3.4.1/d3.min.js', false, '3.4.1');
+			wp_register_script('d3js', plugin_dir_url(__FILE__).'js/d3.min.js', false, '3.4.2');
 		if(!wp_script_is('opcache', 'registered'))
 			wp_register_script('opcache', plugin_dir_url(__FILE__).'js/chart.js', array('jquery', 'd3js'), '0.1.0', true);
 		if(!wp_script_is('jquery-center', 'registered'))
@@ -70,6 +70,7 @@ class opcache_dashboard {
 		if('toplevel_page_opcache' != $hook)
 			return;
 		wp_enqueue_script('opcache');
+		wp_enqueue_script('jquery-center');
 		wp_enqueue_style('opcache');
 	}
 
@@ -98,18 +99,27 @@ class opcache_dashboard {
 									<p id="keys">Keys: <?php echo $stats['num_cached_keys']; ?> of <?php echo $stats['max_cached_keys']; ?></p>
 								</div>
 							</div>
+							<div class="postbox">
+								<h3 class="hndle">
+									<span>Invalidate/Reset</span>
+								</h3>
+								<div class="inside">
+									<p>{form->Invalidate all,Reset/*微妙に内部での挙動が異なるため両方実装。Invalidate allのほうが低速だが、確実*/}</p>
+									{/*sort済みのScriptsをwhileで出す(posts.php的な表示にしても可。実装方法は https://github.com/Automattic/jetpack/blob/master/class.jetpack-network-sites-list-table.php を参照)*/}
+								</div>
+							</div>
 						</div>
 					</div>
 					<div id="postbox-container-2" class="postbox-container">
 						<div class="meta-box-sortables ui-sortable">
 							<div class="postbox">
 								<div class="inside">
+									<form id="graph_ctrl">
+										<label><input type="radio" name="dataset" value="memory" checked>Memory</label>
+										<label><input type="radio" name="dataset" value="keys">Keys</label>
+										<label><input type="radio" name="dataset" value="hits">Hits</label>
+									</form>
 									<div id="graph">
-										<form>
-											<label><input type="radio" name="dataset" value="memory" checked>Memory</label>
-											<label><input type="radio" name="dataset" value="keys">Keys</label>
-											<label><input type="radio" name="dataset" value="hits">Hits</label>
-										</form>
 										<div id="stats"></div>
 									</div>
 								</div>
@@ -154,4 +164,3 @@ class opcache_dashboard {
 }
 
 ?>
-
