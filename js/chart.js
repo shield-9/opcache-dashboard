@@ -6,11 +6,12 @@
 
 jQuery(document).ready(function($) {
 	init();
-	display();
 	set_text("memory");
+	display();
 
 	function init() {
-		var width = $("#graph").width();
+		$graph = $('#graph').css('position', 'relative');
+		var width = $graph.width();
 		var height = width;
 		var radius = width / 2;
 		var colors = ['#B41F1F', '#1FB437', '#ff7f0e'];
@@ -42,10 +43,12 @@ jQuery(document).ready(function($) {
 				.enter()
 				.append("path")
 				.attr("fill", function(d, i) { return color(i); });
+
+		$stats = $('#stats').css('position', 'absolute');
 	}
 
 	function re_init() {
-		var width = $("#graph").width();
+		var width = $graph.width();
 		var height = width;
 		var radius = width / 2;
 
@@ -65,19 +68,19 @@ jQuery(document).ready(function($) {
 
 	function set_text(t) {
 		if(t=="memory") {
-			$("#stats").html(
+			$stats.html(
 				"<table><tr><th style='background:#B41F1F;'>Used</th><td>"+mem_stats[0]+"</td></tr>"
 				+"<tr><th style='background:#1FB437;'>Free</th><td>"+mem_stats[1]+"</td></tr>"
 				+"<tr><th style='background:#ff7f0e;' rowspan=\"2\">Wasted</th><td>"+mem_stats[2]+"</td></tr>"
 				+"<tr><td>"+mem_stats[3]+"%</td></tr></table>"
 			);
 		} else if(t=="keys") {
-			$("#stats").html(
+			$stats.html(
 				"<table><tr><th style='background:#B41F1F;'>Cached keys</th><td>"+dataset[t][0]+"</td></tr>"
 				+"<tr><th style='background:#1FB437;'>Free Keys</th><td>"+dataset[t][1]+"</td></tr></table>"
 			);
 		} else if(t=="hits") {
-			$("#stats").html(
+			$stats.html(
 				"<table><tr><th style='background:#B41F1F;'>Misses</th><td>"+dataset[t][0]+"</td></tr>"
 				+"<tr><th style='background:#1FB437;'>Cache Hits</th><td>"+dataset[t][1]+"</td></tr></table>"
 			);
@@ -85,12 +88,13 @@ jQuery(document).ready(function($) {
 		current_view = t;
 	}
 
-	$("input").change(function (){
-		path=g.selectAll("path")
-			.data(pie(dataset[this.value]));
-		display();
-		set_text(this.value);
-	});
+	$("#graph_ctrl").find("input")
+		.change(function (){
+			path=g.selectAll("path")
+				.data(pie(dataset[this.value]));
+			set_text(this.value);
+			display();
+		});
 
 	$( window ).resize(function() {
 		re_init();
@@ -102,13 +106,14 @@ jQuery(document).ready(function($) {
 			.duration(1000)
 			.attrTween("d", function(d){
 				var interpolate = d3.interpolate(
-					{ startAngle : 0, endAngle : 0 },
-					{ startAngle : d.startAngle, endAngle : d.endAngle }
+					{startAngle: 0, endAngle: 0},
+					{startAngle: d.startAngle, endAngle: d.endAngle}
 				);
 				return function(t){
 					return arc(interpolate(t));
 				}
 			});
+		$stats.center({against: 'parent'});
 		console.log('Current_view reset to: ['+current_view+']');
 	}
 
