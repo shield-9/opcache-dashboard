@@ -7,7 +7,7 @@
  * Author: Daisuke Takahashi(Extend Wings)
  * Author URI: http://www.extendwings.com
  * License: AGPLv3 or later
- * Text Domain: opcache-dashboard
+ * Text Domain: opcache
  * Domain Path: /languages/
 */
 
@@ -16,8 +16,12 @@ if(!function_exists('add_action')) {
 	exit;
 }
 
-add_action('init', array('opcache_dashboard', 'init'));
-class opcache_dashboard {
+if(!class_exists('WP_List_Table')) {
+	require_once(ABSPATH.'wp-admin/includes/class-wp-list-table.php');
+}
+
+add_action('init', array('OPcache_dashboard', 'init'));
+class OPcache_dashboard {
 	static $instance;
 
 	static function init() {
@@ -29,12 +33,12 @@ class opcache_dashboard {
 				add_action('plugins_loaded', array(__CLASS__, 'plugin_textdomain'));
 		*/
 
-			self::$instance = new opcache_dashboard;
+			self::$instance = new OPcache_dashboard;
 		}
 		return self::$instance;
 	}
 
-	private function opcache_dashboard() {
+	private function __construct() {
 		add_action('admin_menu', array($this, 'add_admin_menu'));
 		if(is_multisite() && is_network_admin())
 			add_action('network_admin_menu', array($this, 'add_admin_menu'));
@@ -80,6 +84,10 @@ class opcache_dashboard {
 		$stats = $status['opcache_statistics'];
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
+
+		require_once('./class.list-table.php');
+		$list_table = new OPcache_List_Table($status['scripts']);
+		$list_table->prepare_items();
 		?>
 		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
 			<div id="widgets-wrap">
@@ -105,9 +113,18 @@ class opcache_dashboard {
 								</h3>
 								<div class="inside">
 									<p>{form->Invalidate all,Reset/*微妙に内部での挙動が異なるため両方実装。Invalidate allのほうが低速だが、確実*/}</p>
-									{/*sort済みのScriptsをwhileで出す(posts.php的な表示にしても可。実装方法は https://github.com/Automattic/jetpack/blob/master/class.jetpack-network-sites-list-table.php を参照)*/}
 								</div>
 							</div>
+		<?php if(isset($_GET['dev'])): ?>
+							<div class="postbox">
+								<h3 class="hndle">
+									<span>Developer's Note</span>
+								</h3>
+								<div class="inside">
+									<p>{/*sort済みのScriptsをwhileで出す(posts.php的な表示にしても可。実装方法は https://github.com/Automattic/jetpack/blob/master/class.jetpack-network-sites-list-table.php を参照)*/}</p>
+								</div>
+							</div>
+		<?php endif; ?>
 						</div>
 					</div>
 					<div id="postbox-container-2" class="postbox-container">
@@ -129,6 +146,11 @@ class opcache_dashboard {
 				</div>
 				<div class="clear"></div>
 			</div>
+			<form method="get">
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<?php $list_table->display() ?>
+			</form>
+		<?php endif; ?>
 			
 		</div><!-- wrap -->
 		<script>
