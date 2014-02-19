@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 		var width = $graph.width();
 		var height = width;
 		var radius = width / 2;
-		var colors = ['#B41F1F', '#1FB437', '#ff7f0e'];
+		colors = ['#B41F1F', '#1FB437', '#ff7f0e'];
 
 		d3.scale.customColors = function() {
 			return d3.scale.ordinal().range(colors);
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
 				.append("path")
 				.attr("fill", function(d, i) { return color(i); });
 
-		$stats = $('#stats').css('position', 'absolute');
+		$stats = $('#stats').css('position', 'absolute').append("<table></table>");
 	}
 
 	function re_init() {
@@ -68,28 +68,28 @@ jQuery(document).ready(function($) {
 
 	function set_text(t) {
 		if(t=="memory") {
-			$stats.html(
-				"<table><tr><th style='background:#B41F1F;'>Used</th><td>"+mem_stats[0]+"</td></tr>"
-				+"<tr><th style='background:#1FB437;'>Free</th><td>"+mem_stats[1]+"</td></tr>"
-				+"<tr><th style='background:#ff7f0e;' rowspan=\"2\">Wasted</th><td>"+mem_stats[2]+"</td></tr>"
-				+"<tr><td>"+mem_stats[3]+"%</td></tr></table>"
-			);
+			$stats.children("table").html("\
+				<tr><th style='background:"+colors[0]+";'>Used</th><td>"+mem_stats[0]+"</td></tr>\
+				<tr><th style='background:"+colors[1]+";'>Free</th><td>"+mem_stats[1]+"</td></tr>\
+				<tr><th style='background:"+colors[2]+";' rowspan=\"2\">Wasted</th><td>"+mem_stats[2]+"</td></tr>\
+				<tr><td>"+mem_stats[3]+"%</td></tr>\
+			");
 		} else if(t=="keys") {
-			$stats.html(
-				"<table><tr><th style='background:#B41F1F;'>Cached keys</th><td>"+dataset[t][0]+"</td></tr>"
-				+"<tr><th style='background:#1FB437;'>Free Keys</th><td>"+dataset[t][1]+"</td></tr></table>"
-			);
+			$stats.children("table").html("\
+				<tr><th style='background:"+colors[0]+";'>Cached keys</th><td>"+dataset[t][0]+"</td></tr>\
+				<tr><th style='background:"+colors[1]+";'>Free Keys</th><td>"+dataset[t][1]+"</td></tr>\
+			");
 		} else if(t=="hits") {
-			$stats.html(
-				"<table><tr><th style='background:#B41F1F;'>Misses</th><td>"+dataset[t][0]+"</td></tr>"
-				+"<tr><th style='background:#1FB437;'>Cache Hits</th><td>"+dataset[t][1]+"</td></tr></table>"
-			);
+			$stats.children("table").html("\
+				<tr><th style='background:"+colors[0]+";'>Misses</th><td>"+dataset[t][0]+"</td></tr>\
+				<tr><th style='background:"+colors[1]+";'>Cache Hits</th><td>"+dataset[t][1]+"</td></tr>\
+			");
 		}
 		current_view = t;
 	}
 
 	$("#graph_ctrl").find("input")
-		.change(function (){
+		.change(function(){
 			path=g.selectAll("path")
 				.data(pie(dataset[this.value]));
 			set_text(this.value);
