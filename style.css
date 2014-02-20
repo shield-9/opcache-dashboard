@@ -16,7 +16,8 @@
 }
 
 #widgets-wrap{
-	overflow:hidden
+	overflow:hidden;
+	margin: 0 -8px;
 }
 
 @media only screen and (max-width:799px){
