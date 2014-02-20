@@ -69,7 +69,7 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function prepare_items() {
-		$per_page = 5;
+		$per_page = 15;
 
 		$columns = $this->get_columns();
 		$hidden = array();
