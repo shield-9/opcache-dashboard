@@ -58,13 +58,45 @@ class OPcache_dashboard {
 
 	function add_admin_menu() {
 		add_menu_page(
-			__('OPcache Dashboard', 'opcache'),	//page_title
-			__('OPcache', 'opcache'),		//menu_title
-			'manage_options',			//capability
-			'opcache',				//menu_slug
-			array($this, 'admin_page'),		//function
-			'dashicons-backup',			//icon_url
-			'3.14159265359'				//position
+			__('OPcache Dashboard', 'opcache'),	// page_title
+			__('OPcache', 'opcache'),		// menu_title
+			'manage_options',			// capability
+			'opcache',				// menu_slug
+			array($this, 'admin_page'),		// function
+			'dashicons-backup',			// icon_url
+			'3.14159265359'				// position
+		);
+		add_submenu_page(
+			'opcache',				// parent_slug,
+			__('OPcache Dashboard', 'opcache'),	// page_title
+			__('Dashboard', 'opcache'),		// menu_title,
+			'manage_options',			// capability,
+			'opcache',				// menu_slug,
+			array($this, 'admin_page')		// function
+		);
+		add_submenu_page(
+			'opcache',					// parent_slug,
+			__('Status', 'opcache'),			// page_title
+			__('Status', 'opcache'),			// menu_title,
+			'manage_options',				// capability,
+			'opcache-status',				// menu_slug,
+			array($this, 'render_admin_status_page')	// function
+		);
+		add_submenu_page(
+			'opcache',					// parent_slug,
+			__('Scripts', 'opcache'),			// page_title
+			__('Scripts', 'opcache'),			// menu_title,
+			'manage_options',				// capability,
+			'opcache-scripts',				// menu_slug,
+			array($this, 'render_admin_scripts_page')	// function
+		);
+		add_submenu_page(
+			'opcache',					// parent_slug,
+			__('Configuration', 'opcache'),			// page_title
+			__('Configuration', 'opcache'),			// menu_title,
+			'manage_options',				// capability,
+			'opcache-config',				// menu_slug,
+			array($this, 'render_admin_config_page')	// function
 		);
 
 		add_action('admin_enqueue_scripts', array($this, 'admin_menu_assets'));
@@ -84,10 +116,6 @@ class OPcache_dashboard {
 		$stats = $status['opcache_statistics'];
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
-
-		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
-		$list_table = new OPcache_List_Table($status['scripts']);
-		$list_table->prepare_items();
 		?>
 		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
 			<div id="widgets-wrap">
@@ -146,11 +174,6 @@ class OPcache_dashboard {
 				</div>
 				<div class="clear"></div>
 			</div>
-			<form method="get">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-				<?php $list_table->display() ?>
-			</form>
-			
 		</div><!-- wrap -->
 		<script>
 			var dataset={
@@ -165,6 +188,66 @@ class OPcache_dashboard {
 				'<?php echo $this->number_format($mem_stats['current_wasted_percentage'],2); ?>'
 			];
 		</script>
+		<?php
+	}
+
+	function render_admin_status_page() {
+	//	$config = opcache_get_configuration();
+		$status = opcache_get_status(false);
+		$stats = $status['opcache_statistics'];
+		$mem_stats = $status['memory_usage'];
+		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
+
+		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
+		$list_table = new OPcache_List_Table($status);
+		$list_table->prepare_items();
+		?>
+		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
+			<form method="get">
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<?php $list_table->display() ?>
+			</form>
+		</div><!-- wrap -->
+		<?php
+	}
+
+	function render_admin_scripts_page() {
+	//	$config = opcache_get_configuration();
+		$status = opcache_get_status();
+	//	$stats = $status['opcache_statistics'];
+	//	$mem_stats = $status['memory_usage'];
+	//	$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
+
+		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
+		$list_table = new OPcache_List_Table($status['scripts']);
+		$list_table->prepare_items();
+		?>
+		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
+			<form method="get">
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<?php $list_table->display() ?>
+			</form>
+		</div><!-- wrap -->
+		<?php
+	}
+
+	function render_admin_config_page() {
+		$config = opcache_get_configuration();
+	//	$status = opcache_get_status();
+	//	$stats = $status['opcache_statistics'];
+	//	$mem_stats = $status['memory_usage'];
+	//	$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
+
+		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
+		$list_table = new OPcache_List_Table($status['scripts']);
+		$list_table->prepare_items();
+		?>
+		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
+			<form method="get">
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<?php $list_table->display() ?>
+			</form>
+		</div><!-- wrap -->
 		<?php
 	}
 
