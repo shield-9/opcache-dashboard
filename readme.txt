@@ -27,22 +27,23 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 
 Unless otherwise stated, all files in this repo is licensed under GNU AGPLv3. See "LICENSE" file.
 
-<dl>
-	<dt>js/jquery.ceter.js</dt>
-	<dt>js/jquery.ceter.min.js</dt>
-		<dd>Copyright (c) 2011 [Ben Lin](http://dreamerslab.com/)</dd>
-		<dd>Licensed under [the MIT License](https://raw2.github.com/dreamerslab/jquery.center/72408e8ae31ba533f26c976f8a1baca1912adfa4/LICENSE.txt)</dd>
-		<dd>Copy license text is also available as *js/jquery.center.license*</dd>
-	<dt>js/d3.js</dt>
-	<dt>js/d3.min.js</dt>
-		<dd>Copyright (c) 2014 Michael Bostock</dd>
-		<dd>Licensed under [the BSD License](https://raw2.github.com/mbostock/d3/04fa5dd3856de768b43b4aac9e34c112f1227a17/LICENSE)</dd>
-		<dd>Copy license text is also available as *js/d3.license*</dd>
-</dl>
+### The MIT License
+* js/jquery.ceter.js
+* js/jquery.ceter.min.js
+	* Copyright (c) 2011 [Ben Lin](http://dreamerslab.com/)
+	* Licensed under [the MIT License](https://raw2.github.com/dreamerslab/jquery.center/72408e8ae31ba533f26c976f8a1baca1912adfa4/LICENSE.txt)
+	* Copy license text is also available as *js/jquery.center.license*
+
+### The BSD License
+* js/d3.js
+* js/d3.min.js
+	* Copyright (c) 2014 Michael Bostock
+	* Licensed under [the BSD License](https://raw2.github.com/mbostock/d3/04fa5dd3856de768b43b4aac9e34c112f1227a17/LICENSE)
+	* Copy license text is also available as *js/d3.license*
 
 == Installation ==
 
-1. Upload the `server-status` folder to the `/wp-content/plugins/` directory.
+1. Upload the `opcache` folder to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
@@ -56,10 +57,10 @@ Unless otherwise stated, all files in this repo is licensed under GNU AGPLv3. Se
 
 == Changelog ==
 
-= 0.1 =
+= 0.1.0 =
 * Initial Beta Release
 
 == Upgrade Notice ==
 
-= 0.1 =
+= 0.1.0 =
 * None
