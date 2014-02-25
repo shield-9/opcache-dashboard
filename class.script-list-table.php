@@ -14,7 +14,7 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function extra_tablenav($which) {
-		switch(which) {
+		switch($which) {
 			case 'top':
 				echo 'Extra Table Navigation(Top)';
 				break;
