@@ -103,7 +103,7 @@ class OPcache_List_Table extends WP_List_Table {
 		function usort_reorder($a,$b){
 			$orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'full_path'; //If no sort, default to title
 			$order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'asc'; //If no order, default to asc
-			$result = strcmp($a[$orderby], $b[$orderby]); //Determine sort order
+			$result = strnatcmp($a[$orderby], $b[$orderby]); //Determine sort order
 			return ($order==='asc') ? $result : -$result; //Send final sort direction to usort
 		}
 
