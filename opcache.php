@@ -103,11 +103,17 @@ class OPcache_dashboard {
 	}
 
 	function admin_menu_assets($hook) {
-		if('toplevel_page_opcache' != $hook)
-			return;
-		wp_enqueue_script('opcache');
-		wp_enqueue_script('jquery-center');
-		wp_enqueue_style('opcache');
+		switch($hook) {
+			case 'toplevel_page_opcache':
+				wp_enqueue_script('opcache');
+				wp_enqueue_script('jquery-center');
+			case 'opcache_page_opcache-scripts':
+			case 'opcache_page_opcache-status':
+			case 'opcache_page_opcache-config':
+				wp_enqueue_style('opcache');
+				break;
+		}
+		return;
 	}
 
 	function admin_page() {
@@ -252,14 +258,14 @@ class OPcache_dashboard {
 	}
 
 	function size($size) {
-		$si_units = array("", "k", "M", "G", "T", "P", "E", "Z", "Y");
+		$si_units = array('', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y');
 		$i = 0;
 		while($size >= 1024 && $i < count($si_units)) {
 			$size = round($size / 1024, 2);
 			$i++;
 		}
 
-		return $this->number_format($size) . $si_units[$i] . "B";
+		return $this->number_format($size) . $si_units[$i] . 'B';
 	}
 
 	function number_format($number, $decimals = 2) {

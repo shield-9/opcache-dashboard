@@ -53,3 +53,34 @@
 		float:right
 	}
 }
+
+
+
+
+
+
+.fixed .column-last_used_timestamp,
+.fixed .column-timestamp {
+	width: 10%;
+}
+
+.fixed .column-hits,
+.fixed .column-memory_consumption {
+	width: 10%;
+}
+
+@media screen and ( max-width: 782px ) {
+	/* WP List Table Adjustments: Columns to hide */
+	.fixed .column-last_used_timestamp,
+	.fixed .column-timestamp {
+		display: none;
+	}
+
+	.fixed .column-hits {
+		width: 15%;
+	}
+
+	.fixed .column-memory_consumption {
+		width: 35%;
+	}
+}
