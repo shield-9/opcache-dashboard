@@ -96,7 +96,7 @@ jQuery(document).ready(function($) {
 			display();
 		});
 
-	$( window ).resize(function() {
+	$(document).resize(function() {
 		re_init();
 		display();
 	});
