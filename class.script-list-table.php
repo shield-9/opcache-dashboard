@@ -74,18 +74,25 @@ class OPcache_List_Table extends WP_List_Table {
 
 	function get_bulk_actions() {
 		$actions = array(
-			'invalidate'	=> __('Invalidate', 'opcache')
+			'invalidate'		=> __('Invalidate', 'opcache'),
+			'invalidate_force'	=> __('Force Invalidate', 'opcache')
 		);
 		return $actions;
 	}
 
 	function process_bulk_action() {
-		if('invalidate'===$this->current_action()) {
-			if(!isset($_GET['script']) or is_array($_GET['script']))
-				return false;
+		if(!isset($_GET['script']) or !is_array($_GET['script']))
+			return false;
+		switch($this->current_action()) {
+			case 'invalidate':
+				foreach($_GET['script'] as $script)
+					opcache_invalidate($script);
 
-			foreach($_GET['script'] as $script)
-				opcache_invalidate($script);
+				break;
+			case 'invalidate_force':
+				foreach($_GET['script'] as $script)
+					opcache_invalidate($script, true);
+				break;
 		}
 	}
 
