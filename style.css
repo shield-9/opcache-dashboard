@@ -60,16 +60,23 @@
 
 
 .fixed .column-last_used_timestamp,
-.fixed .column-timestamp {
-	width: 10%;
-}
-
+.fixed .column-timestamp,
 .fixed .column-hits,
 .fixed .column-memory_consumption {
 	width: 10%;
 }
 
-@media screen and ( max-width: 782px ) {
+@media (min-resolution: 2dppx) {
+	@media (max-width: 1200px) {
+		.fixed .column-last_used_timestamp,
+		.fixed .column-timestamp,
+		.fixed .column-memory_consumption {
+			width: 15%;
+		}
+	}
+}
+
+@media (max-width: 782px) {
 	/* WP List Table Adjustments: Columns to hide */
 	.fixed .column-last_used_timestamp,
 	.fixed .column-timestamp {
