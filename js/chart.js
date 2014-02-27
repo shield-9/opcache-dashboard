@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
 	init();
 	set_text("memory");
 	display();
+	var document_width = $(document).width();
 
 	function init() {
 		$graph = $('#graph').css('position', 'relative');
@@ -96,9 +97,12 @@ jQuery(document).ready(function($) {
 			display();
 		});
 
-	$(document).resize(function() {
-		re_init();
-		display();
+	$(window).resize(function() {
+		if($(document).width() != document_width) {
+			re_init();
+			display();
+			document_width = $(document).width();
+		}
 	});
 
 	function display(){
