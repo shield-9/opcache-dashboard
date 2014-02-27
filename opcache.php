@@ -117,6 +117,21 @@ class OPcache_dashboard {
 	}
 
 	function admin_page() {
+		if(isset($_GET['_wpnonce']) && check_admin_referer('opcache_ctrl','_wpnonce')) {
+			print_r($_REQUEST);
+			switch($_GET['action']) {
+				case 'reset':
+					opcache_reset();
+					echo '<div class="updated"><p>Reseted!</p></div>';
+					break;
+				case 'invalidate':
+					opcache_invalidate();
+					break;
+				case 'invalidate_force':
+					opcache_invalidate(, true);
+					break;
+			}
+		}
 		$config = opcache_get_configuration();
 		$status = opcache_get_status();
 		$stats = $status['opcache_statistics'];
@@ -146,7 +161,10 @@ class OPcache_dashboard {
 									<span>Invalidate/Reset</span>
 								</h3>
 								<div class="inside">
-									<p>{form->Invalidate all,Reset/*微妙に内部での挙動が異なるため両方実装。Invalidate allのほうが低速だが、確実*/}</p>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=reset&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-primary button-large">Reset</a>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-large">Invalidate All</a>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate_force&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-large">Force Invalidate All</a>
+									<p>Please refer to <a href="//php.net/ref.opcache">the PHP.net</a> for these difference information.</p>
 								</div>
 							</div>
 		<?php if(isset($_GET['dev'])): ?>
