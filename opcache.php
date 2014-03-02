@@ -125,10 +125,10 @@ class OPcache_dashboard {
 					echo '<div class="updated"><p>Reseted!</p></div>';
 					break;
 				case 'invalidate':
-					opcache_invalidate();
+					//opcache_invalidate();
 					break;
 				case 'invalidate_force':
-					opcache_invalidate(, true);
+					//opcache_invalidate(, true);
 					break;
 			}
 		}
@@ -167,16 +167,27 @@ class OPcache_dashboard {
 									<p>Please refer to <a href="//php.net/ref.opcache">the PHP.net</a> for these difference information.</p>
 								</div>
 							</div>
-		<?php if(isset($_GET['dev'])): ?>
-							<div class="postbox">
+							<div id="info-widget" class="postbox">
 								<h3 class="hndle">
-									<span>Developer's Note</span>
+									<span>Information</span>
 								</h3>
 								<div class="inside">
-									<p>{/*sort済みのScriptsをwhileで出す(posts.php的な表示にしても可。実装方法は https://github.com/Automattic/jetpack/blob/master/class.jetpack-network-sites-list-table.php を参照)*/}</p>
+									<div class="info-widget">
+										<h4>h4</h4>
+										<p>WordPress 3.8.1 (<a href="themes.php">Graphene with Extend Wings Customize</a> テーマ)</p>
+									</div>
+									<div class="info-widget">
+										<h4>Contact</h4>
+										<p>If you want to contact <a href="http://www.extendwings.com/">Daisuke Takahashi(Extend Wings)</a>, you can use:</p>
+										<div>
+											<a href="https://wordpress.org/support/plugin/opcache">Plugin Support Forum</a> (This forum is visible for everyone.)
+										</div>
+										<div>
+											For Confidential Information, <a href="https://plus.google.com/+DaisukeTakahashi0120">Google Hangouts (Message)</a>, <a href="https://www.beta.facebook.com/messages/daisuke.takahashi.0120">Facebook Message</a> or <a href="https://twitter.com/direct_messages/create/yaemonsan">Twitter Direct Message</a> is recommended.
+										</div>
+									</div>
 								</div>
 							</div>
-		<?php endif; ?>
 						</div>
 					</div>
 					<div id="postbox-container-2" class="postbox-container">

@@ -3,6 +3,11 @@
 ------------------------------------------------------------------------------*/
 
 /* For Dashboard */
+#widgets-wrap{
+	overflow:hidden;
+	margin: 0 -8px;
+}
+
 .postbox-container{
 	float:left
 }
@@ -20,9 +25,41 @@
 	cursor:auto;
 }
 
-#widgets-wrap{
-	overflow:hidden;
-	margin: 0 -8px;
+#widgets .postbox .inside {
+	margin-bottom: 0;
+}
+
+#info-widget .inside {
+	padding: 0;
+	margin: 0;
+}
+
+.info-widget {
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+	padding: 8px 0 11px;
+}
+
+.info-widget:last-child {
+	border-bottom: 0;
+}
+
+#widgets h4 {
+	font-size: 14px;
+}
+
+#info-widget h4 {
+	margin: 0 0 8px 12px;
+	font-weight: 400;
+}
+#info-widget p {
+	padding: 0 12px;
+	margin-bottom: 0;
+}
+
+.info-widget div {
+	padding: 0 12px;
+	margin: 1em 0;
 }
 
 @media only screen and (max-width:799px){
