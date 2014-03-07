@@ -105,6 +105,11 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	$("#collapse-menu").click(function() {
+		re_init();
+		display();
+	});
+
 	function display(){
 		path.transition()
 			.duration(1000)
