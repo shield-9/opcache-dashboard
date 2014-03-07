@@ -192,7 +192,7 @@ class OPcache_dashboard {
 											<a href="https://wordpress.org/support/plugin/opcache">Plugin Support Forum</a> (This forum is visible for everyone.)
 										</div>
 										<div>
-											For Confidential Information, <a href="https://plus.google.com/+DaisukeTakahashi0120">Google Hangouts (Message)</a>, <a href="https://www.beta.facebook.com/messages/daisuke.takahashi.0120">Facebook Message</a> or <a href="https://twitter.com/direct_messages/create/yaemonsan">Twitter Direct Message</a> is recommended.
+											<strong>For Confidential information</strong>, <a href="https://plus.google.com/+DaisukeTakahashi0120">Google Hangouts (Message)</a> or <a href="https://www.beta.facebook.com/messages/daisuke.takahashi.0120">Facebook Message</a> is recommended due to security considerations.
 										</div>
 									</div>
 								</div>
