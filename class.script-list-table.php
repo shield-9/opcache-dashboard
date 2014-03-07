@@ -1,6 +1,6 @@
 <?php
 class OPcache_List_Table extends WP_List_Table {
-	public $data = array ();
+	public $data = array();
 
 	function __construct($data) {
 		global $status, $page;
