@@ -125,15 +125,21 @@ class OPcache_dashboard {
 					echo '<div class="updated"><p>Reseted!</p></div>';
 					break;
 				case 'invalidate':
-					//opcache_invalidate();
+					$status = opcache_get_status();
+					foreach($status as $script)
+						opcache_invalidate($script['full_path']);
+					echo '<div class="updated"><p>Invalidated!</p></div>';
 					break;
 				case 'invalidate_force':
-					//opcache_invalidate(, true);
+					$status = opcache_get_status();
+					foreach($status as $script)
+						opcache_invalidate($script['full_path'], true);
+					echo '<div class="updated"><p>Force Invalidated!</p></div>';
 					break;
 			}
 		}
 		$config = opcache_get_configuration();
-		$status = opcache_get_status();
+		$status = opcache_get_status(false);
 		$stats = $status['opcache_statistics'];
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
@@ -162,8 +168,8 @@ class OPcache_dashboard {
 								</h3>
 								<div class="inside">
 									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=reset&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-primary button-large">Reset</a>
-									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-large">Invalidate All</a>
-									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate_force&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-large">Force Invalidate All</a>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Invalidate All</a>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate_force&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Force Invalidate All</a>
 									<p>Please refer to <a href="//php.net/ref.opcache">the PHP.net</a> for these difference information.</p>
 								</div>
 							</div>
