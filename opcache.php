@@ -179,8 +179,11 @@ class OPcache_dashboard {
 								</h3>
 								<div class="inside">
 									<div class="info-widget">
-										<h4>h4</h4>
-										<p>WordPress 3.8.1 (<a href="themes.php">Graphene with Extend Wings Customize</a> テーマ)</p>
+										<h4>Copyright</h4>
+										<p>
+											&copy;2012-2014 Extend Wings. Portions &copy;2010-2012 Web Online.<br />
+											This software is licensed under <a href="<?php echo plugin_dir_url(__FILE__); ?>LICENSE">GNU AGPLv3</a>.
+										</p>
 									</div>
 									<div class="info-widget">
 										<h4>Contact</h4>
