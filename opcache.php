@@ -307,7 +307,7 @@ class OPcache_dashboard {
 			$i++;
 		}
 
-		return $this->number_format($size) . $si_units[$i] . 'B';
+		return OPcache_dashboard::number_format($size) . $si_units[$i] . 'B';
 	}
 
 	function number_format($number, $decimals = 2) {
