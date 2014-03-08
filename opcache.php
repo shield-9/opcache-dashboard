@@ -164,12 +164,13 @@ class OPcache_dashboard {
 							</div>
 							<div class="postbox">
 								<h3 class="hndle">
-									<span>Invalidate/Reset</span>
+									<span>Reset/Invalidate</span>
 								</h3>
 								<div class="inside">
 									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=reset&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>&_wp_http_referer=<?php echo urlencode(wp_unslash($_SERVER['REQUEST_URI'])); ?>" class="button button-primary button-large">Reset</a>
-									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Invalidate All</a>
-									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate_force&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Force Invalidate All</a>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Invalidate</a>
+									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate_force&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Force Invalidate</a>
+									<p><strong>These actions affect all cached opcodes.</strong></p>
 									<p>Please refer to <a href="//php.net/ref.opcache">the PHP.net</a> for these difference information.</p>
 								</div>
 							</div>
