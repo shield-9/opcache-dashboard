@@ -241,12 +241,27 @@ class OPcache_dashboard {
 
 	function render_admin_status_page() {
 	//	$config = opcache_get_configuration();
-		$status = opcache_get_status(false);
-		$stats = $status['opcache_statistics'];
-		$mem_stats = $status['memory_usage'];
-		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
+		$raw_status = opcache_get_status(false);
+	//	$stats = $status['opcache_statistics'];
+	//	$mem_stats = $status['memory_usage'];
+	//	$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
 
-		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
+		require_once(plugin_dir_path(__FILE__).'class.status-list-table.php');
+		foreach($raw_status as $key => $value) {
+			if($key === 'scripts')
+				continue;
+
+			if(is_bool($value))
+				$value = ($value === true) ? 'true' : 'false';
+
+			if(is_array($value)) {
+				foreach($value as $k => $v) {
+					if(is_bool($v)) $v = ($v === true) ? 'true' : 'false';
+					$status[] = array('name' => $k, 'value' => $v);
+				}
+			} else
+				$status[] = array('name' => $key, 'value' => $value);
+		}
 		$list_table = new OPcache_List_Table($status);
 		$list_table->prepare_items();
 		?>
