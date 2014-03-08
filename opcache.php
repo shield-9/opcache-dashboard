@@ -54,6 +54,8 @@ class OPcache_dashboard {
 			wp_register_script('jquery-center', plugin_dir_url(__FILE__).'js/jquery.center.min.js', array('jquery'), '1.1.1');
 		if(!wp_style_is('opcache', 'registered'))
 			wp_register_style('opcache', plugin_dir_url(__FILE__).'style.css', false, '0.1.0');
+		if(!wp_style_is('genericons', 'registered'))
+			wp_register_style('genericons', plugin_dir_url(__FILE__).'/css/genericons.css', false, '3.0.3');
 	}
 
 	function add_admin_menu() {
@@ -111,6 +113,7 @@ class OPcache_dashboard {
 			case 'opcache_page_opcache-status':
 			case 'opcache_page_opcache-config':
 				wp_enqueue_style('opcache');
+				wp_enqueue_style('genericons');
 				break;
 		}
 		return;
