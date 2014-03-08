@@ -53,9 +53,9 @@ class OPcache_dashboard {
 		if(!wp_script_is('jquery-center', 'registered'))
 			wp_register_script('jquery-center', plugin_dir_url(__FILE__).'js/jquery.center.min.js', array('jquery'), '1.1.1');
 		if(!wp_style_is('opcache', 'registered'))
-			wp_register_style('opcache', plugin_dir_url(__FILE__).'style.css', false, '0.1.0');
+			wp_register_style('opcache', plugin_dir_url(__FILE__).'css/style.css', false, '0.1.0');
 		if(!wp_style_is('genericons', 'registered'))
-			wp_register_style('genericons', plugin_dir_url(__FILE__).'/css/genericons.css', false, '3.0.3');
+			wp_register_style('genericons', plugin_dir_url(__FILE__).'css/genericons.css', false, '3.0.3');
 	}
 
 	function add_admin_menu() {
