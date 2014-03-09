@@ -295,14 +295,22 @@ class OPcache_dashboard {
 	}
 
 	function render_admin_config_page() {
-		$config = opcache_get_configuration();
+		$raw_config = opcache_get_configuration();
 	//	$status = opcache_get_status();
 	//	$stats = $status['opcache_statistics'];
 	//	$mem_stats = $status['memory_usage'];
 	//	$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
 
-		require_once(plugin_dir_path(__FILE__).'class.list-table.php');
-		$list_table = new OPcache_List_Table($status['scripts']);
+		require_once(plugin_dir_path(__FILE__).'class.config-list-table.php');
+		foreach($raw_config as $key => $value) {
+			if(is_array($value)) {
+				foreach($value as $k => $v) {
+					if(is_bool($v)) $v = ($v === true) ? 'true' : 'false';
+					$config[] = array('name' => $key.'.'.$k, 'value' => $v);
+				}
+			}
+		}
+		$list_table = new OPcache_List_Table($config);
 		$list_table->prepare_items();
 		?>
 		<div class="wrap"><h2><?php _e('OPcache Dashboard', 'opcache'); ?></h2>
