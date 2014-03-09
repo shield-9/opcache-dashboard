@@ -35,8 +35,9 @@ class OPcache_List_Table extends WP_List_Table {
 	function column_name($item) {
 		$actions = NULL;
 		if(strpos($item['name'], 'directives.')===0) {
-			$actions['manual'] = sprintf('<a href="//php.net/opcache.configuration#ini.%1$s">PHP.net</a>', str_replace('directives.', NULL, $item['name']));
-		}
+			$manual = sprintf('<a href="//php.net/opcache.configuration#ini.%1$s" title="PHP.net Document"><span class="genericon genericon-info"></span></a>', str_replace('directives.', NULL, $item['name']));
+		} else
+			$manual = NULL;
 
 		switch($item['name']) {
 			case 'directives.opcache.enable':
@@ -46,7 +47,7 @@ class OPcache_List_Table extends WP_List_Table {
 				if($item['value']!=='true') $actions['notice'] = 'If you are in a production environment you should disabled it';
 				break;
 		}
-		return sprintf('<strong><span class="row-title">%1$s</span></strong>%2$s', $item['name'], $this->row_actions($actions));
+		return sprintf('<strong><span class="row-title">%1$s</span></strong> %2$s %3$s', $item['name'], $manual, $this->row_actions($actions));
 	}
 
 	function column_value($item) {
