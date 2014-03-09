@@ -41,10 +41,10 @@ class OPcache_List_Table extends WP_List_Table {
 
 		switch($item['name']) {
 			case 'directives.opcache.enable':
-				if($item['value']==='true') $actions['notice'] = 'You should enabled opcache';
+				if($item['value']!=='true') $actions['notice'] = 'You should enabled opcache';
 				break;
 			case 'directives.opcache.validate_timestamps':
-				if($item['value']!=='true') $actions['notice'] = 'If you are in a production environment you should disabled it';
+				if($item['value']==='true') $actions['notice'] = '<a href="//php.net/opcache.installation#opcache.installation.recommended" title="Recommended Settings">If you are in a production environment you should disabled it</a>';
 				break;
 		}
 		return sprintf('<strong><span class="row-title">%1$s</span></strong> %2$s %3$s', $item['name'], $manual, $this->row_actions($actions));
