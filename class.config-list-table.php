@@ -35,16 +35,26 @@ class OPcache_List_Table extends WP_List_Table {
 	function column_name($item) {
 		$actions = NULL;
 		if(strpos($item['name'], 'directives.')===0) {
-			$manual = sprintf('<a href="//php.net/opcache.configuration#ini.%1$s" title="PHP.net Document"><span class="genericon genericon-info"></span></a>', str_replace('directives.', NULL, $item['name']));
+			$manual = sprintf(
+				'<a href="//php.net/opcache.configuration#ini.%1$s" title="%2$s"><span class="genericon genericon-info"></span></a>',
+				str_replace('directives.', NULL, $item['name']),
+				__('PHP.net Document')
+			);
 		} else
 			$manual = NULL;
 
 		switch($item['name']) {
 			case 'directives.opcache.enable':
-				if($item['value']!=='true') $actions['notice'] = 'You should enabled opcache';
+				if($item['value']!=='true') $actions['notice'] = __('You should enabled opcache');
 				break;
 			case 'directives.opcache.validate_timestamps':
-				if($item['value']==='true') $actions['notice'] = '<a href="//php.net/opcache.installation#opcache.installation.recommended" title="Recommended Settings">If you are in a production environment you should disabled it</a>';
+				if($item['value']==='true') {
+					$actions['notice'] = sprintf(
+						'<a href="//php.net/opcache.installation#opcache.installation.recommended" title="%1$s">%2$s</a>',
+						__('Recommended Settings'),
+						__('If you are in a production environment you should disabled it')
+					);
+				}
 				break;
 		}
 		return sprintf('<strong><span class="row-title">%1$s</span></strong> %2$s %3$s', $item['name'], $manual, $this->row_actions($actions));

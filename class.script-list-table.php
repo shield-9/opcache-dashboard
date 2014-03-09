@@ -16,10 +16,10 @@ class OPcache_List_Table extends WP_List_Table {
 	function extra_tablenav($which) {
 		switch($which) {
 			case 'top':
-				echo 'Extra Table Navigation(Top)';
+				_e('Extra Table Navigation(Top)');
 				break;
 			case 'bottom':
-				echo 'Extra Table Navigation(Bottom)';
+				_e('Extra Table Navigation(Bottom)');
 				break;
 		}
 	}
@@ -53,11 +53,7 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function column_script_path($item){
-		$actions = array(
-		//	'edit'	  => sprintf('<a href="?page=%s&action=%s&movie=%s">Edit</a>',$_REQUEST['page'],'edit',$item['ID']),
-		//	'delete'	=> sprintf('<a href="?page=%s&action=%s&movie=%s">Delete</a>',$_REQUEST['page'],'delete',$item['ID']),
-		);
-		return sprintf('%1$s %2$s', $item['full_path'], $this->row_actions($actions));
+		return $item['full_path'];
 	}
 
 	function column_default($item, $column_name){
@@ -65,8 +61,6 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'last_used_timestamp':
 			case 'timestamp':
 				return date(__('j M, Y @ G:i:s', 'opcache'), $item[$column_name]);
-			case 'invalidate':
-				return print_r($item, true);
 			default:
 				return $item[$column_name];
 		}
@@ -87,7 +81,6 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'invalidate':
 				foreach($_GET['script'] as $script)
 					opcache_invalidate($script);
-
 				break;
 			case 'invalidate_force':
 				foreach($_GET['script'] as $script)
@@ -115,19 +108,6 @@ class OPcache_List_Table extends WP_List_Table {
 		}
 
 		usort($this->data, 'usort_reorder');
-
-		/***********************************************************************
-		 * ---------------------------------------------------------------------
-		 * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-		 * 
-		 * In a real-world situation, this is where you would place your query.
-		 *
-		 * For information on making queries in WordPress, see this Codex entry:
-		 * http://codex.wordpress.org/Class_Reference/wpdb
-		 * 
-		 * ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		 * ---------------------------------------------------------------------
-		 **********************************************************************/
 
 		$current_page = $this->get_pagenum();
 

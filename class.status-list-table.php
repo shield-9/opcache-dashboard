@@ -36,10 +36,10 @@ class OPcache_List_Table extends WP_List_Table {
 		$actions = NULL;
 		switch($item['name']) {
 			case 'opcache_enabled':
-				if($item['value']!=='true') $actions['notice'] = 'You should enabled opcache';
+				if($item['value']!=='true') $actions['notice'] = __('You should enabled opcache');
 				break;
 			case 'cache_full':
-				if($item['value']==='true') $actions['notice'] = 'You should increase opcache.memory_consumption';
+				if($item['value']==='true') $actions['notice'] = __('You should increase opcache.memory_consumption');
 				break;
 		}
 		return sprintf('<strong><span class="row-title">%1$s</span></strong>%2$s', $item['name'], $this->row_actions($actions));
@@ -49,7 +49,7 @@ class OPcache_List_Table extends WP_List_Table {
 		switch($item['name']) {
 			case 'start_time':
 			case 'last_restart_time':
-				return $item['value'] ? date(__('j M, Y @ G:i:s', 'opcache'), $item['value']) : 'never';
+				return $item['value'] ? date(__('j M, Y @ G:i:s', 'opcache'), $item['value']) : __('never');
 			case 'used_memory':
 			case 'free_memory':
 			case 'wasted_memory':
