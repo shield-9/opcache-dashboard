@@ -205,9 +205,9 @@ class OPcache_dashboard {
 											<img id="github-logo" src="<?php echo plugin_dir_url(__FILE__); ?>images/github.svg">
 										</h4>
 										<p>
-											<iframe src="http://goo.gl/hKdzvc" seamless style="width: 95px; height: 20px;"></iframe>
-											<iframe src="http://goo.gl/Qym9RD" seamless style="width: 95px; height: 20px;"></iframe>
-											<iframe src="http://goo.gl/BWZpTg" seamless style="width: 170px; height: 20px;"></iframe>
+											<iframe src="<?php echo plugin_dir_url(__FILE__); ?>github-btn.html?user=shield-9&repo=opcache-dashboard&type=watch&count=true" seamless style="width: 70px; height: 20px;"></iframe>
+											<iframe src="<?php echo plugin_dir_url(__FILE__); ?>github-btn.html?user=shield-9&repo=opcache-dashboard&type=fork&count=true" seamless style="width: 95px; height: 20px;"></iframe>
+											<iframe src="<?php echo plugin_dir_url(__FILE__); ?>github-btn.html?user=shield-9&type=follow&count=true" seamless style="width: 170px; height: 20px;"></iframe>
 										</p>
 									</div>
 								</div>
