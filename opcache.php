@@ -186,7 +186,7 @@ class OPcache_dashboard {
 										<h4>Copyright</h4>
 										<p>
 											&copy;2012-2014 Extend Wings. Portions &copy;2010-2012 Web Online.<br />
-											This software is licensed under <a href="<?php echo plugin_dir_url(__FILE__); ?>LICENSE"><img id="agpl-logo" src="<?php echo plugin_dir_url(__FILE__); ?>agpl.svg" alt="GNU AGPLv3"></a>.
+											This software is licensed under <a href="<?php echo plugin_dir_url(__FILE__); ?>LICENSE"><img id="agpl-logo" src="<?php echo plugin_dir_url(__FILE__); ?>images/agpl.svg" alt="GNU AGPLv3"></a>.
 										</p>
 									</div>
 									<div class="info-widget">
@@ -198,6 +198,14 @@ class OPcache_dashboard {
 										<div>
 											<strong>For Confidential information</strong>, <a href="https://plus.google.com/+DaisukeTakahashi0120">Google Hangouts (Message)</a> or <a href="https://www.beta.facebook.com/messages/daisuke.takahashi.0120">Facebook Message</a> is recommended due to security considerations.
 										</div>
+									</div>
+									<div class="info-widget">
+										<h4><img id="github-logo" src="<?php echo plugin_dir_url(__FILE__); ?>images/github.svg"></h4>
+										<p>
+											<iframe src="http://goo.gl/J4OcCU" seamless style="width: 70px; height: 20px;"></iframe>
+											<iframe src="http://goo.gl/Qym9RD" seamless style="width: 95px; height: 20px;"></iframe>
+											<iframe src="http://goo.gl/BWZpTg" seamless style="width: 170px; height: 20px;"></iframe>
+										</p>
 									</div>
 								</div>
 							</div>

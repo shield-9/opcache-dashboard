@@ -66,6 +66,11 @@
 	height: 37px;
 }
 
+#agpl-logo {
+	vertical-align: middle;
+	height: 14px;
+}
+
 @media only screen and (max-width:799px){
 	#wpbody-content #widgets .postbox-container{
 		width:100%
