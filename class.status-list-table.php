@@ -33,6 +33,7 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function column_name($item) {
+		$actions = NULL;
 		switch($item['name']) {
 			case 'opcache_enabled':
 				$actions = $item['value'] ? NULL : array('notice' => 'You should enabled opcache');
