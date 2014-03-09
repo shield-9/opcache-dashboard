@@ -186,7 +186,7 @@ class OPcache_dashboard {
 										<h4>Copyright</h4>
 										<p>
 											&copy;2012-2014 Extend Wings. Portions &copy;2010-2012 Web Online.<br />
-											This software is licensed under <a href="<?php echo plugin_dir_url(__FILE__); ?>LICENSE"><img id="agpl-logo" src="<?php echo plugin_dir_url(__FILE__); ?>agpl.svg">GNU AGPLv3</a>.
+											This software is licensed under <a href="<?php echo plugin_dir_url(__FILE__); ?>LICENSE"><img id="agpl-logo" src="<?php echo plugin_dir_url(__FILE__); ?>agpl.svg" alt="GNU AGPLv3"></a>.
 										</p>
 									</div>
 									<div class="info-widget">
