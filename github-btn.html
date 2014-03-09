@@ -47,47 +47,42 @@ function jsonp(b) {
 }
 
 function callback(a) {
-	if (type == "watch") {
+	if(type == "watch") {
 		counter.innerHTML = addCommas(a.data.watchers)
-	} else {
-		if (type == "fork") {
-			counter.innerHTML = addCommas(a.data.forks)
-		} else {
-			if (type == "follow") {
-				counter.innerHTML = addCommas(a.data.followers)
-			}
-		}
+	} else if(type == "fork") {
+		counter.innerHTML = addCommas(a.data.forks)
+	} else if (type == "follow") {
+		counter.innerHTML = addCommas(a.data.followers)
 	}
-	if (count == "true") {
+
+	if(count == "true") {
 		counter.style.display = "block"
 	}
 }
 
 button.href = "https://github.com/" + user + "/" + repo + "/";
 
-if (type == "watch") {
+if(type == "watch") {
 	mainButton.className += " github-watchers";
 	text.innerHTML = "Star";
 	counter.href = "https://github.com/" + user + "/" + repo + "/stargazers"
-} else {
-	if (type == "fork") {
-		mainButton.className += " github-forks";
-		text.innerHTML = "Fork";
-		counter.href = "https://github.com/" + user + "/" + repo + "/network"
-	} else {
-		if (type == "follow") {
-			mainButton.className += " github-me";
-			text.innerHTML = "Follow @" + user;
-			button.href = "https://github.com/" + user;
-			counter.href = "https://github.com/" + user + "/followers"
-		}
-	}
+} else if(type == "fork") {
+	mainButton.className += " github-forks";
+	text.innerHTML = "Fork";
+	button.href = "https://github.com/" + user + "/" + repo + "/fork";
+	counter.href = "https://github.com/" + user + "/" + repo + "/network"
+} else if(type == "follow") {
+	mainButton.className += " github-me";
+	text.innerHTML = "Follow @" + user;
+	button.href = "https://github.com/" + user;
+	counter.href = "https://github.com/" + user + "/followers"
 }
-if (size == "large") {
+
+if(size == "large") {
 	mainButton.className += " github-btn-large"
 }
 
-if (type == "follow") {
+if(type == "follow") {
 	jsonp("https://api.github.com/users/" + user)
 } else {
 	jsonp("https://api.github.com/repos/" + user + "/" + repo)
