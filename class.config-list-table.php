@@ -63,8 +63,6 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function prepare_items() {
-		$per_page = 50;
-
 		$columns = $this->get_columns();
 		$hidden = array();
 		$sortable = array();
@@ -75,14 +73,12 @@ class OPcache_List_Table extends WP_List_Table {
 
 		$total_items = count($this->data);
 
-		$this->data = array_slice($this->data,(($current_page-1)*$per_page),$per_page);
-
 		$this->items = $this->data;
 
 		$this->set_pagination_args(array(
 			'total_items'	=> $total_items,
-			'per_page'	=> $per_page,
-			'total_pages'	=> ceil($total_items/$per_page)
+			'per_page'	=> $total_items,
+			'total_pages'	=> 1
 		));
 	}
 }
