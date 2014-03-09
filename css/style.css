@@ -52,6 +52,12 @@
 	margin: 0 0 8px 12px;
 	font-weight: 400;
 }
+
+#info-widget h4 .genericon {
+	font-size: 16px;
+	vertical-align: middle;
+}
+
 #info-widget p {
 	padding: 0 12px;
 }

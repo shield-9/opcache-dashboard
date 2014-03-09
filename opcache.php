@@ -200,9 +200,12 @@ class OPcache_dashboard {
 										</div>
 									</div>
 									<div class="info-widget">
-										<h4><img id="github-logo" src="<?php echo plugin_dir_url(__FILE__); ?>images/github.svg"></h4>
+										<h4>
+											<span class="genericon genericon-github"></span>
+											<img id="github-logo" src="<?php echo plugin_dir_url(__FILE__); ?>images/github.svg">
+										</h4>
 										<p>
-											<iframe src="http://goo.gl/J4OcCU" seamless style="width: 70px; height: 20px;"></iframe>
+											<iframe src="http://goo.gl/hKdzvc" seamless style="width: 95px; height: 20px;"></iframe>
 											<iframe src="http://goo.gl/Qym9RD" seamless style="width: 95px; height: 20px;"></iframe>
 											<iframe src="http://goo.gl/BWZpTg" seamless style="width: 170px; height: 20px;"></iframe>
 										</p>
