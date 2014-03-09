@@ -53,7 +53,7 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function column_script_path($item){
-		return $item['full_path'];
+		return sprintf('<strong><span class="row-title">%1$s</span></strong>', $item['full_path']);
 	}
 
 	function column_default($item, $column_name){
