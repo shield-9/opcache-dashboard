@@ -314,7 +314,7 @@ class OPcache_dashboard {
 		<?php
 	}
 
-	function size($size) {
+	static function size($size) {
 		$si_units = array('', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y');
 		$i = 0;
 		while($size >= 1024 && $i < count($si_units)) {
@@ -325,7 +325,7 @@ class OPcache_dashboard {
 		return OPcache_dashboard::number_format($size) . $si_units[$i] . 'B';
 	}
 
-	function number_format($number, $decimals = 2) {
+	static function number_format($number, $decimals = 2) {
 		return number_format($number, $decimals, '.', ',');
 	}
 }
