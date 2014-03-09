@@ -32,6 +32,18 @@ class OPcache_List_Table extends WP_List_Table {
 		return $columns;
 	}
 
+	function column_name($item) {
+		switch($item['name']) {
+			case 'opcache_enabled':
+				$actions = $item['value'] ? NULL : array('notice' => 'You should enabled opcache');
+				break;
+			case 'cache_full':
+				$actions = $item['value'] ? array('notice' => 'You should increase opcache.memory_consumption') : NULL;
+				break;
+		}
+		return sprintf('<strong><span class="row-title">%1$s</span></strong>%2$s', $item['name'], $this->row_actions($actions));
+	}
+
 	function column_value($item){
 		switch($item['name']) {
 			case 'start_time':

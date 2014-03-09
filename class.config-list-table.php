@@ -7,8 +7,8 @@ class OPcache_List_Table extends WP_List_Table {
 		$this->data = $data;
 
 		parent::__construct(array(
-			'singular'	=> 'status',
-			'plural'	=> 'status',
+			'singular'	=> 'config',
+			'plural'	=> 'configs',
 			'ajax'		=> false
 		));
 	}
@@ -26,8 +26,8 @@ class OPcache_List_Table extends WP_List_Table {
 
 	function get_columns() {
 		$columns = array(
-			'name'	=> __('Status Name', 'opcache'),
-			'value'	=> _x('Value', 'Value of Status', 'opcache')
+			'name'	=> __('Config Name', 'opcache'),
+			'value'	=> _x('Value', 'Value of Config', 'opcache')
 		);
 		return $columns;
 	}
@@ -35,10 +35,10 @@ class OPcache_List_Table extends WP_List_Table {
 	function column_name($item) {
 		switch($item['name']) {
 			case 'directives.opcache.enable':
-				$actions = array('notice' => 'You should enabled opcache');
+				$actions = $item['value'] ? NULL : array('notice' => 'You should enabled opcache');
 				break;
 			case 'directives.opcache.validate_timestamps':
-				$actions = array('notice' => 'If you are in a production environment you should disabled it');
+				$actions = $item['value'] ? array('notice' => 'If you are in a production environment you should disabled it') : NULL;
 				break;
 		}
 		return sprintf('<strong><span class="row-title">%1$s</span></strong>%2$s', $item['name'], $this->row_actions($actions));
@@ -46,10 +46,7 @@ class OPcache_List_Table extends WP_List_Table {
 
 	function column_value($item) {
 		switch($item['name']) {
-		/*	case 'start_time':
-		 *	case 'last_restart_time':
-		 *		return $item['value'] ? date(__('j M, Y @ G:i:s', 'opcache'), $item['value']) : 'never';
-		 */	case 'directives.opcache.memory_consumption':
+			case 'directives.opcache.memory_consumption':
 				return OPcache_dashboard::size($item['value']);
 			case 'directives.opcache.max_wasted_percentage':
 				return OPcache_dashboard::number_format($item['value']) . '%';
