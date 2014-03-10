@@ -24,6 +24,8 @@ add_action('init', array('OPcache_dashboard', 'init'));
 class OPcache_dashboard {
 	static $instance;
 
+	static $php_url = "http://php.shield-9.org";
+
 	static function init() {
 		if(!self::$instance) {
 		/*
@@ -174,7 +176,7 @@ class OPcache_dashboard {
 									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Invalidate</a>
 									<a href="?page=<?php echo $_REQUEST['page']; ?>&action=invalidate_force&_wpnonce=<?php echo wp_create_nonce('opcache_ctrl'); ?>" class="button button-large">Force Invalidate</a>
 									<p><strong>These actions affect all cached opcodes.</strong></p>
-									<p>Please refer to <a href="//php.net/ref.opcache">the PHP.net</a> for these difference information.</p>
+									<p>Please refer to <a href="<?php echo OPcache_dashboard::$php_url; ?>/ref.opcache">the PHP.net</a> for these difference information.</p>
 								</div>
 							</div>
 							<div id="info-widget" class="postbox">
