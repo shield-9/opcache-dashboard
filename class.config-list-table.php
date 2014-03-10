@@ -36,7 +36,8 @@ class OPcache_List_Table extends WP_List_Table {
 		$actions = NULL;
 		if(strpos($item['name'], 'directives.')===0) {
 			$manual = sprintf(
-				'<a href="<?php echo OPcache_dashboard::$php_url; ?>/opcache.configuration#ini.%1$s" title="%2$s"><span class="genericon genericon-info"></span></a>',
+				'<a href="%1$s/opcache.configuration#ini.%2$s" title="%3$s"><span class="genericon genericon-info"></span></a>',
+				OPcache_dashboard::$php_url,
 				str_replace(array('directives.', '_'), array(NULL, '-'), $item['name']),
 				__('PHP.net Document')
 			);
@@ -50,7 +51,8 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.validate_timestamps':
 				if($item['value']==='true') {
 					$actions['notice'] = sprintf(
-						'<a href="<?php echo OPcache_dashboard::$php_url; ?>/opcache.installation#opcache.installation.recommended" title="%1$s">%2$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						OPcache_dashboard::$php_url,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should disabled it')
 					);
