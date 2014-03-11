@@ -28,12 +28,10 @@ class OPcache_dashboard {
 
 	static function init() {
 		if(!self::$instance) {
-		/*
 			if(did_action('plugins_loaded'))
 				self::plugin_textdomain();
 			else
 				add_action('plugins_loaded', array(__CLASS__, 'plugin_textdomain'));
-		*/
 
 			self::$instance = new OPcache_dashboard;
 		}
@@ -333,6 +331,10 @@ class OPcache_dashboard {
 			</form>
 		</div><!-- wrap -->
 		<?php
+	}
+
+	static function plugin_textdomain() {
+		load_plugin_textdomain('opcache', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 	}
 
 	static function size($size) {
