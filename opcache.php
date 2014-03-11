@@ -187,13 +187,13 @@ class OPcache_dashboard {
 									<div class="info-widget">
 										<h4>Copyright</h4>
 										<p>
-											&copy;2012-2014 Extend Wings. Portions &copy;2010-2012 Web Online.<br />
+											&copy;2012-2014 <a href="http://www.extendwings.com/">Daisuke Takahashi(Extend Wings)</a>. Portions &copy;2010-2012 Web Online.<br />
 											This software is licensed under <a href="<?php echo plugin_dir_url(__FILE__); ?>LICENSE"><img id="agpl-logo" src="<?php echo plugin_dir_url(__FILE__); ?>images/agpl.svg" alt="GNU AGPLv3"></a>.
 										</p>
 									</div>
 									<div class="info-widget">
 										<h4>Contact</h4>
-										<p>If you want to contact <a href="http://www.extendwings.com/">Daisuke Takahashi(Extend Wings)</a>, you can use:</p>
+										<p>If you want to contact Daisuke Takahashi(Extend Wings), you can use:</p>
 										<div>
 											<a href="https://wordpress.org/support/plugin/opcache">Plugin Support Forum</a> (This forum is visible for everyone.)
 										</div>
