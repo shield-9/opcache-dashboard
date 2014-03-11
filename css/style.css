@@ -77,6 +77,14 @@
 	height: 14px;
 }
 
+ifame[seamless] {
+	display: inline;
+}
+
+.github-button {
+	height: 20px;
+}
+
 @media only screen and (max-width:799px){
 	#wpbody-content #widgets .postbox-container{
 		width:100%
