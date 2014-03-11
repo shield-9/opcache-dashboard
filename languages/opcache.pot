@@ -1,0 +1,139 @@
+# Copyright (C) 2014 OPcache Dashboard
+# This file is distributed under the same license as the OPcache Dashboard package.
+msgid ""
+msgstr ""
+"Project-Id-Version: OPcache Dashboard 0.2.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/opcache\n"
+"POT-Creation-Date: 2014-03-11 10:47:14+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: class.config-list-table.php:29
+msgid "Config Name"
+msgstr ""
+
+#: class.config-list-table.php:30
+msgctxt "Value of Config"
+msgid "Value"
+msgstr ""
+
+#: class.config-list-table.php:42
+msgid "PHP.net Document"
+msgstr ""
+
+#: class.config-list-table.php:49 class.status-list-table.php:39
+msgid "You should enabled opcache"
+msgstr ""
+
+#: class.config-list-table.php:56
+msgid "Recommended Settings"
+msgstr ""
+
+#: class.config-list-table.php:57
+msgid "If you are in a production environment you should disabled it"
+msgstr ""
+
+#: class.script-list-table.php:19
+msgid "Extra Table Navigation(Top)"
+msgstr ""
+
+#: class.script-list-table.php:22
+msgid "Extra Table Navigation(Bottom)"
+msgstr ""
+
+#: class.script-list-table.php:30
+msgid "Script Path"
+msgstr ""
+
+#: class.script-list-table.php:31
+msgctxt "Number of hits"
+msgid "Hits"
+msgstr ""
+
+#: class.script-list-table.php:32
+msgid "Memory Consumption"
+msgstr ""
+
+#: class.script-list-table.php:33
+msgid "Last Used"
+msgstr ""
+
+#: class.script-list-table.php:34
+msgid "Timestamp"
+msgstr ""
+
+#: class.script-list-table.php:63 class.status-list-table.php:52
+msgid "j M, Y @ G:i:s"
+msgstr ""
+
+#: class.script-list-table.php:71
+msgid "Invalidate"
+msgstr ""
+
+#: class.script-list-table.php:72
+msgid "Force Invalidate"
+msgstr ""
+
+#: class.status-list-table.php:29
+msgid "Status Name"
+msgstr ""
+
+#: class.status-list-table.php:30
+msgctxt "Value of Status"
+msgid "Value"
+msgstr ""
+
+#: class.status-list-table.php:42
+msgid "You should increase opcache.memory_consumption"
+msgstr ""
+
+#: class.status-list-table.php:52
+msgid "never"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (OPcache Dashboard 0.2.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: opcache.php:65 opcache.php:75 opcache.php:152 opcache.php:281
+#: opcache.php:301 opcache.php:329
+msgid "OPcache Dashboard"
+msgstr ""
+
+#: opcache.php:66
+msgid "OPcache"
+msgstr ""
+
+#: opcache.php:76
+msgid "Dashboard"
+msgstr ""
+
+#: opcache.php:83 opcache.php:84
+msgid "Status"
+msgstr ""
+
+#: opcache.php:91 opcache.php:92
+msgid "Scripts"
+msgstr ""
+
+#: opcache.php:99 opcache.php:100
+msgid "Configuration"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/opcache/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "OPcache dashboard designed for WordPress"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Daisuke Takahashi(Extend Wings)"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.extendwings.com"
+msgstr ""

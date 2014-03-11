@@ -1,0 +1,141 @@
+# Copyright (C) 2014 OPcache Dashboard
+# This file is distributed under the same license as the OPcache Dashboard package.
+msgid ""
+msgstr ""
+"Project-Id-Version: OPcache Dashboard 0.2.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/opcache\n"
+"POT-Creation-Date: 2014-03-11 10:47:14+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-03-11 19:58+0900\n"
+"Last-Translator: Daisuke Takahashi(Extend Wings) <daisuke@extenwings.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.6.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ja\n"
+
+#: class.config-list-table.php:29
+msgid "Config Name"
+msgstr "設定名"
+
+#: class.config-list-table.php:30
+msgctxt "Value of Config"
+msgid "Value"
+msgstr "値"
+
+#: class.config-list-table.php:42
+msgid "PHP.net Document"
+msgstr "PHP.netのドキュメント"
+
+#: class.config-list-table.php:49 class.status-list-table.php:39
+msgid "You should enabled opcache"
+msgstr "OPcacheを有効化するべきです"
+
+#: class.config-list-table.php:56
+msgid "Recommended Settings"
+msgstr "推奨設定"
+
+#: class.config-list-table.php:57
+msgid "If you are in a production environment you should disabled it"
+msgstr "本番環境では無効化するべきです"
+
+#: class.script-list-table.php:19
+msgid "Extra Table Navigation(Top)"
+msgstr ""
+
+#: class.script-list-table.php:22
+msgid "Extra Table Navigation(Bottom)"
+msgstr ""
+
+#: class.script-list-table.php:30
+msgid "Script Path"
+msgstr "スクリプトパス"
+
+#: class.script-list-table.php:31
+msgctxt "Number of hits"
+msgid "Hits"
+msgstr "ヒット数"
+
+#: class.script-list-table.php:32
+msgid "Memory Consumption"
+msgstr "メモリ消費量"
+
+#: class.script-list-table.php:33
+msgid "Last Used"
+msgstr "最終使用日"
+
+#: class.script-list-table.php:34
+msgid "Timestamp"
+msgstr "日時"
+
+#: class.script-list-table.php:63 class.status-list-table.php:52
+msgid "j M, Y @ G:i:s"
+msgstr "Y年n月j日 @ G:i:s"
+
+#: class.script-list-table.php:71
+msgid "Invalidate"
+msgstr "無効化"
+
+#: class.script-list-table.php:72
+msgid "Force Invalidate"
+msgstr "強制無効化"
+
+#: class.status-list-table.php:29
+msgid "Status Name"
+msgstr "状態名"
+
+#: class.status-list-table.php:30
+msgctxt "Value of Status"
+msgid "Value"
+msgstr "値"
+
+#: class.status-list-table.php:42
+msgid "You should increase opcache.memory_consumption"
+msgstr "opcache.memory_consumptionを増やすべきです"
+
+#: class.status-list-table.php:52
+msgid "never"
+msgstr "なし"
+
+#. Plugin Name of the plugin/theme
+#: opcache.php:65 opcache.php:75 opcache.php:152 opcache.php:281
+#: opcache.php:301 opcache.php:329
+msgid "OPcache Dashboard"
+msgstr "OPcache Dashboard"
+
+#: opcache.php:66
+msgid "OPcache"
+msgstr "OPcache"
+
+#: opcache.php:76
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: opcache.php:83 opcache.php:84
+msgid "Status"
+msgstr "状態"
+
+#: opcache.php:91 opcache.php:92
+msgid "Scripts"
+msgstr "スクリプト"
+
+#: opcache.php:99 opcache.php:100
+msgid "Configuration"
+msgstr "設定"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/opcache/"
+msgstr "http://wordpress.org/plugins/opcache/"
+
+#. Description of the plugin/theme
+msgid "OPcache dashboard designed for WordPress"
+msgstr "WordPressのために設計されたOPcacheのダッシュボード"
+
+#. Author of the plugin/theme
+msgid "Daisuke Takahashi(Extend Wings)"
+msgstr "Daisuke Takahashi(Extend Wings)"
+
+#. Author URI of the plugin/theme
+msgid "http://www.extendwings.com"
+msgstr "http://www.extendwings.com"
