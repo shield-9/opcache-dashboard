@@ -29,6 +29,17 @@
 	margin-bottom: 0;
 }
 
+#widgets h4 {
+	margin: 0 0 8px 12px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+#widgets h4 .genericon {
+	font-size: 16px;
+	vertical-align: middle;
+}
+
 #info-widget .inside {
 	padding: 0;
 	margin: 0;
@@ -44,27 +55,17 @@
 	border-bottom: 0;
 }
 
-#widgets h4 {
-	font-size: 14px;
-}
-
-#info-widget h4 {
-	margin: 0 0 8px 12px;
-	font-weight: 400;
-}
-
-#info-widget h4 .genericon {
-	font-size: 16px;
-	vertical-align: middle;
-}
-
-#info-widget p {
+.info-widget p {
 	padding: 0 12px;
 }
 
 .info-widget div {
 	padding: 0 12px;
 	margin: 1em 0;
+}
+
+.info-widget .contact-list {
+	list-style: circle inside;
 }
 
 #agpl-logo {

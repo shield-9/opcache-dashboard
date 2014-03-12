@@ -1,6 +1,6 @@
 <?php
 class OPcache_List_Table extends WP_List_Table {
-	public $data = array();
+	private $data = array();
 
 	function __construct($data) {
 		global $status, $page;
@@ -37,7 +37,7 @@ class OPcache_List_Table extends WP_List_Table {
 		if(strpos($item['name'], 'directives.')===0) {
 			$manual = sprintf(
 				'<a href="%1$s/opcache.configuration#ini.%2$s" title="%3$s"><span class="genericon genericon-info"></span></a>',
-				OPcache_dashboard::$php_url,
+				OPcache_dashboard::PHP_URL,
 				str_replace(array('directives.', '_'), array(NULL, '-'), $item['name']),
 				__('PHP.net Document')
 			);

@@ -70,20 +70,20 @@ jQuery(document).ready(function($) {
 	function set_text(t) {
 		if(t=="memory") {
 			$stats.children("table").html("\
-				<tr><th style='background:"+colors[0]+";'>Used</th><td>"+mem_stats[0]+"</td></tr>\
-				<tr><th style='background:"+colors[1]+";'>Free</th><td>"+mem_stats[1]+"</td></tr>\
-				<tr><th style='background:"+colors[2]+";' rowspan=\"2\">Wasted</th><td>"+mem_stats[2]+"</td></tr>\
+				<tr><th style='background:"+colors[0]+";'>"+label[t][0]+"</th><td>"+mem_stats[0]+"</td></tr>\
+				<tr><th style='background:"+colors[1]+";'>"+label[t][1]+"</th><td>"+mem_stats[1]+"</td></tr>\
+				<tr><th style='background:"+colors[2]+";' rowspan=\"2\">"+label[t][2]+"</th><td>"+mem_stats[2]+"</td></tr>\
 				<tr><td>"+mem_stats[3]+"%</td></tr>\
 			");
 		} else if(t=="keys") {
 			$stats.children("table").html("\
-				<tr><th style='background:"+colors[0]+";'>Cached keys</th><td>"+dataset[t][0]+"</td></tr>\
-				<tr><th style='background:"+colors[1]+";'>Free Keys</th><td>"+dataset[t][1]+"</td></tr>\
+				<tr><th style='background:"+colors[0]+";'>"+label[t][0]+"</th><td>"+dataset[t][0]+"</td></tr>\
+				<tr><th style='background:"+colors[1]+";'>"+label[t][1]+"</th><td>"+dataset[t][1]+"</td></tr>\
 			");
 		} else if(t=="hits") {
 			$stats.children("table").html("\
-				<tr><th style='background:"+colors[0]+";'>Misses</th><td>"+dataset[t][0]+"</td></tr>\
-				<tr><th style='background:"+colors[1]+";'>Cache Hits</th><td>"+dataset[t][1]+"</td></tr>\
+				<tr><th style='background:"+colors[0]+";'>"+label[t][0]+"</th><td>"+dataset[t][0]+"</td></tr>\
+				<tr><th style='background:"+colors[1]+";'>"+label[t][1]+"</th><td>"+dataset[t][1]+"</td></tr>\
 			");
 		}
 		current_view = t;
