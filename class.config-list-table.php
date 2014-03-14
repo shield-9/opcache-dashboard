@@ -52,9 +52,9 @@ class OPcache_List_Table extends WP_List_Table {
 				if($item['value']==='true') {
 					$actions['notice'] = sprintf(
 						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
-						OPcache_dashboard::$php_url,
+						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
-						__('If you are in a production environment you should disabled it')
+						__('If you are in a production environment you should set longer than 60 sec.')
 					);
 				}
 				break;
