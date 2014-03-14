@@ -127,25 +127,26 @@ iframe[seamless] {
 /*------------------------------------------------------------------------------
   2.1 - For Status List
 ------------------------------------------------------------------------------*/
-
-
+.widefat.fixed.status .column-value {
+	width: 35%;
+}
 
 /*------------------------------------------------------------------------------
   2.2 - For Scripts List
 ------------------------------------------------------------------------------*/
 
-.fixed .column-last_used_timestamp,
-.fixed .column-timestamp,
-.fixed .column-hits,
-.fixed .column-memory_consumption {
+.widefat.fixed.scripts .column-last_used_timestamp,
+.widefat.fixed.scripts .column-timestamp,
+.widefat.fixed.scripts .column-hits,
+.widefat.fixed.scripts .column-memory_consumption {
 	width: 10%;
 }
 
 @media (min-resolution: 2dppx) {
 	@media (max-width: 1200px) {
-		.fixed .column-last_used_timestamp,
-		.fixed .column-timestamp,
-		.fixed .column-memory_consumption {
+		.widefat.fixed.scripts .column-last_used_timestamp,
+		.widefat.fixed.scripts .column-timestamp,
+		.widefat.fixed.scripts .column-memory_consumption {
 			width: 15%;
 		}
 	}
@@ -153,16 +154,16 @@ iframe[seamless] {
 
 @media (max-width: 782px) {
 	/* WP List Table Adjustments: Columns to hide */
-	.fixed .column-last_used_timestamp,
-	.fixed .column-timestamp {
+	.widefat.fixed.scripts .column-last_used_timestamp,
+	.widefat.fixed.scripts .column-timestamp {
 		display: none;
 	}
 
-	.fixed .column-hits {
+	.widefat.fixed.scripts .column-hits {
 		width: 15%;
 	}
 
-	.fixed .column-memory_consumption {
+	.widefat.fixed.scripts .column-memory_consumption {
 		width: 35%;
 	}
 }
@@ -170,4 +171,8 @@ iframe[seamless] {
 /*------------------------------------------------------------------------------
   2.3 - For Configurations List
 ------------------------------------------------------------------------------*/
+.widefat.fixed.configs .column-value {
+	width: 35%;
+}
+
 
