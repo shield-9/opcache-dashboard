@@ -16,10 +16,10 @@ class OPcache_List_Table extends WP_List_Table {
 	function extra_tablenav($which) {
 		switch($which) {
 			case 'top':
-				_e('Extra Table Navigation(Top)');
+				//esc_html_e('Extra Table Navigation(Top)');
 				break;
 			case 'bottom':
-				_e('Extra Table Navigation(Bottom)');
+				//esc_html_e('Extra Table Navigation(Bottom)');
 				break;
 		}
 	}
@@ -53,7 +53,7 @@ class OPcache_List_Table extends WP_List_Table {
 	}
 
 	function column_script_path($item){
-		return sprintf('<strong><span class="row-title">%1$s</span></strong>', $item['full_path']);
+		return sprintf('<strong><span class="row-path">%1$s</span></strong>', $item['full_path']);
 	}
 
 	function column_default($item, $column_name){

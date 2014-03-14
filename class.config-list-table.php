@@ -16,10 +16,10 @@ class OPcache_List_Table extends WP_List_Table {
 	function extra_tablenav($which) {
 		switch($which) {
 			case 'top':
-				//echo 'Extra Table Navigation(Top)';
+				//esc_html_e('Extra Table Navigation(Top)', 'opcache');
 				break;
 			case 'bottom':
-				//echo 'Extra Table Navigation(Bottom)';
+				//esc_html_e('Extra Table Navigation(Bottom)', 'opcache');
 				break;
 		}
 	}
@@ -167,7 +167,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.mmap_base':
 				break;
 		}
-		return sprintf('<strong><span class="row-title">%1$s</span></strong> %2$s %3$s', $item['name'], $manual, $this->row_actions($actions));
+		return sprintf('<strong><span class="row-name">%1$s</span></strong> %2$s %3$s', $item['name'], $manual, $this->row_actions($actions));
 	}
 
 	function column_value($item) {
