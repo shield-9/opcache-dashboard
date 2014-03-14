@@ -24,8 +24,8 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 	* Licensed under GNU AFFERO GENERAL PUBLIC LICENSE, Version 3
 
 ### The MIT License
-* js/jquery.ceter.js
-* js/jquery.ceter.min.js
+* js/jquery.center.js
+* js/jquery.center.min.js
 	* Copyright (c) 2011 [Ben Lin](http://dreamerslab.com/)
 	* Licensed under [the MIT License](https://raw2.github.com/dreamerslab/jquery.center/72408e8ae31ba533f26c976f8a1baca1912adfa4/LICENSE.txt)
 	* Copy license text is also available as *js/jquery.center.license*
