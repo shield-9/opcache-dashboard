@@ -36,7 +36,7 @@ class OPcache_List_Table extends WP_List_Table {
 		$actions = NULL;
 		if(strpos($item['name'], 'directives.')===0) {
 			$manual = sprintf(
-				'<a href="%1$s/opcache.configuration#ini.%2$s" title="%3$s"><span class="genericon genericon-info"></span></a>',
+				'<a href="%1$s/opcache.configuration#ini.%2$s" title="%3$s" target="_blank"><span class="genericon genericon-info"></span></a>',
 				OPcache_dashboard::PHP_URL,
 				str_replace(array('directives.', '_'), array(NULL, '-'), $item['name']),
 				__('PHP.net Document')
@@ -51,7 +51,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.enable_cli':
 				if($item['value']!=='true') {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should enabled it')
@@ -61,7 +61,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.memory_consumption':
 				if($item['value'] < 134217728) {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should set larger than 128.00MB')
@@ -71,7 +71,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.interned_strings_buffer':
 				if($item['value'] < 8) {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should set larger than 8.00MB')
@@ -81,7 +81,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.max_accelerated_files':
 				if($item['value'] < 4000) {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should set greater than 4000')
@@ -98,7 +98,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.revalidate_freq':
 				if($item['value'] < 60) {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should set longer than 60 sec.')
@@ -110,7 +110,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.save_comments':
 				if($item['value']!=='true') {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should enabled it')
@@ -122,7 +122,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.fast_shutdown':
 				if($item['value']!=='true') {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should enabled it')
@@ -132,7 +132,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.enable_file_override':
 				if($item['value']==='true') {
 					$actions['notice'] = sprintf(
-						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s">%3$s</a>',
+						'<a href="%1$s/opcache.installation#opcache.installation.recommended" title="%2$s" target="_blank">%3$s</a>',
 						OPcache_dashboard::PHP_URL,
 						__('Recommended Settings'),
 						__('If you are in a production environment you should disabled it')

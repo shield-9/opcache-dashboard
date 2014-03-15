@@ -215,7 +215,7 @@ class OPcache_dashboard {
 									<p>
 										<?php printf(
 											esc_html__('Please refer to %s for these difference information.', 'opcache'),
-											sprintf('<a href="%1$s">%2$s</a>',
+											sprintf('<a href="%1$s" target="_blank">%2$s</a>',
 												esc_url(OPcache_dashboard::PHP_URL . '/ref.opcache'),
 												esc_html__('the PHP.net', 'opcache')
 											)
@@ -231,7 +231,7 @@ class OPcache_dashboard {
 									<div class="info-widget">
 										<h4><?php esc_html_e('Copyright', 'opcache'); ?></h4>
 										<p>
-											&copy;2012-2014 <a href="http://www.extendwings.com/">Daisuke Takahashi(Extend Wings)</a>
+											&copy;2012-2014 <a href="http://www.extendwings.com/" target="_blank">Daisuke Takahashi(Extend Wings)</a>
 											Portions &copy;2010-2012 Web Online.
 										</p>
 										<p>
@@ -252,7 +252,7 @@ class OPcache_dashboard {
 											<ul class="contact-list">
 												<li>
 													<?php printf(
-														'<a href="%1$s">%2$s</a> %3$s',
+														'<a href="%1$s" target="_blank">%2$s</a> %3$s',
 														'https://wordpress.org/support/plugin/opcache',
 														esc_html__('Plugin Support Forum', 'opcache'),
 														esc_html__('(This forum is visible for everyone.)', 'opcache')
@@ -264,11 +264,11 @@ class OPcache_dashboard {
 														'<strong>',
 														'</strong>',
 														sprintf(
-															'<a href="https://plus.google.com/+DaisukeTakahashi0120">%s</a>',
+															'<a href="https://plus.google.com/+DaisukeTakahashi0120" target="_blank">%s</a>',
 															esc_html__('Google Hangouts (Message)', 'opcache')
 														),
 														sprintf(
-															'<a href="https://www.facebook.com/messages/daisuke.takahashi.0120">%s</a>',
+															'<a href="https://www.facebook.com/messages/daisuke.takahashi.0120" target="_blank">%s</a>',
 															esc_html__('Facebook Message', 'opcache')
 														)
 													); ?>
@@ -292,7 +292,7 @@ class OPcache_dashboard {
 										<p>
 											<?php printf(
 												'We are waiting for your feedback at %1$sPlugin Review%2$s.',
-												'<a href="https://wordpress.org/support/view/plugin-reviews/opcache">',
+												'<a href="https://wordpress.org/support/view/plugin-reviews/opcache" target="_blank">',
 												'</a>'
 											); ?>
 										</p>
