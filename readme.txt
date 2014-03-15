@@ -71,6 +71,9 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 
 == Changelog ==
 
+= 0.2.1 =
+* Minor Bug Fix See [GitHub](https://github.com/shield-9/opcache-dashboard).
+
 = 0.2.0 =
 * Compatible with many kinds of screen, including Smartphone!
 * Better Main Dashboard Page
