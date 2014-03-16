@@ -52,7 +52,7 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 	* Copy license text is also available as *js/d3.license*
 	* Fetched from [mbostock/d3](https://github.com/mbostock/d3)
 	* Version: 3.4.2
-	* Commit: [04fa5dd3856de768b43b4aac9e34c112f1227a17](https://github.com/mbostock/d3/commit/04fa5dd3856de768b43b4aac9e34c112f1227a17)
+	* Commit: [a4bd16705e2a054f570310d6a8adac663923ab92](https://github.com/mbostock/d3/commit/a4bd16705e2a054f570310d6a8adac663923ab92)
 
 ### Apache License, Version 2.0
 * github-btn.html
