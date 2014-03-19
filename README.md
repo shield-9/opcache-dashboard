@@ -1,8 +1,20 @@
-#[OPcache Dashboard](http://wordpress.org/plugins/opcache/)
+# OPcache Dashboard
+* **Contributors**: extendwings,
+* **Donate link**: http://www.extendwings.com/donate/
+* **Tags**: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
+* **Requires at least**: 3.8
+* **Tested up to**: 3.9-beta1-27604
+* **Stable tag**: 0.2.1
+* **License**: AGPLv3 or later
+* **License URI**: http://www.gnu.org/licenses/agpl.txt
 
-***WARNING***:This is experimental and in development. All files in this repo is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE, Version 3](http://www.gnu.org/licenses/agpl.txt).
+*OPcache dashboard designed for WordPress*
+
+## Description
 
 As you know, OPcache has no management page. This plugins offers you the OPcache dashboard designed for WordPress.
+
+***WARNING***:This is experimental and in development. All files in this repo is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE, Version 3](http://www.gnu.org/licenses/agpl.txt).
 
 ### Notice
 * **Important**: To use this plugin, check following.
@@ -53,3 +65,39 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 	* Portions Copyright (c) 2014 Daisuke Takahashi(Extend Wings)
 	* Fetched from [mdo/github-buttons](https://github.com/mdo/github-buttons)
 	* Commit: [9648c59b3c9fa6e3b13818da48b75a95aa97b152](https://github.com/mdo/github-buttons/commit/9648c59b3c9fa6e3b13818da48b75a95aa97b152)
+
+## Installation
+
+1. Upload the `opcache` folder to the `/wp-content/plugins/` directory.
+1. Activate the plugin through the 'Plugins' menu in WordPress
+
+## Frequently Asked Questions
+
+### There is nothing.
+
+## Screenshots
+
+1. Main Page
+2. Status Page
+
+## Changelog
+
+### 0.2.1
+* Minor Bug Fix See [GitHub](https://github.com/shield-9/opcache-dashboard).
+
+### 0.2.0
+* Compatible with many kinds of screen, including Smartphone!
+* Better Main Dashboard Page
+* Now Status, Scripts and Configurations Pages are all available. This is one of the big progress.
+* There is more improvements. See [GitHub](https://github.com/shield-9/opcache-dashboard).
+
+### 0.1.0
+* Initial Beta Release
+
+## Upgrade Notice
+
+### 0.2.0
+* None
+
+### 0.1.0
+* None

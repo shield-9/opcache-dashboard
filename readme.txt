@@ -3,7 +3,7 @@ Contributors: extendwings,
 Donate link: http://www.extendwings.com/donate/
 Tags: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 Requires at least: 3.8
-Tested up to: 3.9-beta1-27501
+Tested up to: 3.9-beta1-27604
 Stable tag: 0.2.1
 License: AGPLv3 or later
 License URI: http://www.gnu.org/licenses/agpl.txt
@@ -13,6 +13,8 @@ OPcache dashboard designed for WordPress
 == Description ==
 
 As you know, OPcache has no management page. This plugins offers you the OPcache dashboard designed for WordPress.
+
+***WARNING***:This is experimental and in development. All files in this repo is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE, Version 3](http://www.gnu.org/licenses/agpl.txt).
 
 ### Notice
 * **Important**: To use this plugin, check following.
