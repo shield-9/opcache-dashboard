@@ -86,6 +86,10 @@ iframe[seamless] {
 	height: 20px;
 }
 
+#graphbox .handlediv, #graphbox .hndle {
+	display: none;
+}
+
 @media only screen and (max-width:799px){
 	#wpbody-content #widgets .postbox-container{
 		width:100%

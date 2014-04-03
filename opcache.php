@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
  * Plugin Name: OPcache Dashboard
  * Plugin URI: http://wordpress.org/plugins/opcache/
@@ -27,6 +27,8 @@ class OPcache_dashboard {
 	const PHP_URL = 'http://php.shield-9.org';
 
 	const VERSION = '0.2.0';
+	
+	private $data;
 
 	static function init() {
 		if(!self::$instance) {
@@ -108,21 +110,23 @@ class OPcache_dashboard {
 	}
 
 	function admin_menu_assets($hook) {
+		wp_enqueue_style('opcache');
+		wp_enqueue_style('genericons');
 		switch($hook) {
 			case 'toplevel_page_opcache':
 				wp_enqueue_script('opcache');
 				wp_enqueue_script('jquery-center');
+				wp_enqueue_script('postbox');
 			case 'opcache_page_opcache-scripts':
 			case 'opcache_page_opcache-status':
 			case 'opcache_page_opcache-config':
-				wp_enqueue_style('opcache');
-				wp_enqueue_style('genericons');
-				break;
 		}
 		return;
 	}
 
 	function admin_page() {
+		$screen = get_current_screen();
+
 		if(isset($_GET['action']) && isset($_GET['_wpnonce']) && check_admin_referer('opcache_ctrl','_wpnonce')) {
 			switch($_GET['action']) {
 				case 'reset':
@@ -143,179 +147,85 @@ class OPcache_dashboard {
 					break;
 			}
 		}
-		$config = opcache_get_configuration();
-		$status = opcache_get_status(false);
+		$config = $this->data["config"] = opcache_get_configuration();
+		$status = $this->data["status"] = opcache_get_status(false);
 		$stats = $status['opcache_statistics'];
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
+
+		/*
+		add_meta_box(
+			$widget_id,	// widget_id
+			$widget_name,	// widget_name
+			$callback,	// callback
+			$screen,	// screen
+			$location,	// location
+			$priority,	// priority
+			$callback_args	// callback_args
+		);
+		*/
+
+		add_meta_box(
+			'version-info',				// widget_id
+			sprintf(
+				'PHP: %1$s and OPcache: %2$s',
+				phpversion(),
+				$config['version']['version']
+			),					// widget_name
+			array(&$this, 'widget_version_info'),	// callback
+			$screen->id,				// screen
+			'normal'				// location
+		);
+
+		add_meta_box(
+			'ctrl',						// widget_id
+			esc_html__('Reset/Invalidate', 'opcache'),	// widget_name
+			array(&$this, 'widget_ctrl'),			// callback
+			$screen->id,					// screen
+			'normal'					// location
+		);
+
+		add_meta_box(
+			'info-widget',				// widget_id
+			esc_html__('Information', 'opcache'),	// widget_name
+			array(&$this, 'widget_info_widget'),	// callback
+			$screen->id,				// screen
+			'normal'				// location
+		);
+
+		add_meta_box(
+			'graphbox',			// widget_id
+			'Status Graph',			// widget_name
+			array(&$this, 'widget_graph'),	// callback
+			$screen->id,			// screen
+			'side'				// location
+		);
+
 		?>
 		<div class="wrap">
 			<h2><?php esc_html_e('OPcache Dashboard', 'opcache'); ?></h2>
 			<div id="widgets-wrap">
 				<div id="widgets" class="metabox-holder">
+					<?php wp_nonce_field('closedpostboxes', 'closedpostboxesnonce', false ); ?>
+					<?php wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false ); ?>
+					<script type="text/javascript">
+						jQuery(document).ready( function($) {
+							jQuery('.if-js-closed').removeClass('if-js-closed').addClass('closed');
+							if(typeof postboxes !== 'undefined')
+								postboxes.add_postbox_toggles(pagenow);
+						});
+					</script>
 					<div id="postbox-container-1" class="postbox-container">
-						<div class="meta-box-sortables ui-sortable">
-							<div class="postbox">
-								<h3 class="hndle">
-									<span>
-										<?php printf('PHP: %1$s and OPcache: %2$s', phpversion(), $config['version']['version']); ?>
-									</span>
-								</h3>
-								<div class="inside">
-									<p id="hits">
-										<?php printf('Hits: %s%%', $this->number_format($stats['opcache_hit_rate'], 2)); ?>
-									</p>
-									<p id="memory">
-										<?php printf(
-											'Memory: %1$s of %2$s',
-											$this->size($mem_stats['used_memory'] + $mem_stats['wasted_memory']),
-											$this->size($config['directives']['opcache.memory_consumption'])
-										); ?>
-									</p>
-									<p id="keys">
-										<?php printf(
-											'Keys: %1$s of %2$s', $stats['num_cached_keys'], $stats['max_cached_keys']); ?>
-									</p>
-								</div>
-							</div>
-							<div class="postbox">
-								<h3 class="hndle">
-									<span><?php esc_html_e('Reset/Invalidate', 'opcache'); ?></span>
-								</h3>
-								<div class="inside">
-									<?php printf(
-										'<a href="%1$s" class="button button-primary button-large">%2$s</a>',
-										esc_url(admin_url(sprintf(
-												'admin.php?page=%1$s&action=reset&_wpnonce=%2$s&_wp_http_referer=%3$s',
-												$_REQUEST['page'],
-												wp_create_nonce('opcache_ctrl'),
-												urlencode(wp_unslash($_SERVER['REQUEST_URI']))
-										))),
-										esc_html__('Reset', 'opcache')
-									); ?>
-									<?php printf(
-										'<a href="%1$s" class="button button-large">%2$s</a>',
-										esc_url(admin_url(sprintf(
-												'admin.php?page=%1$s&action=invalidate&_wpnonce=%2$s',
-												$_REQUEST['page'],
-												wp_create_nonce('opcache_ctrl')
-										))),
-										esc_html__('Invalidate', 'opcache')
-									); ?>
-									<?php printf(
-										'<a href="%1$s" class="button button-large">%2$s</a>',
-										esc_url(admin_url(sprintf(
-												'admin.php?page=%1$s&action=invalidate_force&_wpnonce=%2$s',
-												$_REQUEST['page'],
-												wp_create_nonce('opcache_ctrl')
-										))),
-										esc_html__('Force Invalidate', 'opcache')
-									); ?>
-									<p><strong><?php esc_html_e('These actions affect all cached opcodes.' ,'opcache'); ?></strong></p>
-									<p>
-										<?php printf(
-											esc_html__('Please refer to %s for these difference information.', 'opcache'),
-											sprintf('<a href="%1$s" target="_blank">%2$s</a>',
-												esc_url(OPcache_dashboard::PHP_URL . '/ref.opcache'),
-												esc_html__('the PHP.net', 'opcache')
-											)
-										); ?>
-									</p>
-								</div>
-							</div>
-							<div id="info-widget" class="postbox">
-								<h3 class="hndle">
-									<span><?php esc_html_e('Information', 'opcache'); ?></span>
-								</h3>
-								<div class="inside">
-									<div class="info-widget">
-										<h4><?php esc_html_e('Copyright', 'opcache'); ?></h4>
-										<p>
-											&copy;2012-2014 <a href="http://www.extendwings.com/" target="_blank">Daisuke Takahashi(Extend Wings)</a>
-											Portions &copy;2010-2012 Web Online.
-										</p>
-										<p>
-											<?php printf(
-												esc_html__('This software is licensed under %s.', 'opcache'),
-												sprintf(
-													'<a href="%1$s"><img id="agpl-logo" src="%2$s" alt="GNU AFFERO GENERAL PUBLIC LICENSE, Version 3"></a>',
-													esc_url(plugin_dir_url(__FILE__) . 'LICENSE'),
-													esc_url(plugin_dir_url(__FILE__) . 'images/agpl.svg')
-												)
-											); ?>
-										</p>
-									</div>
-									<div class="info-widget">
-										<h4><?php esc_html_e('Contact', 'opcache'); ?></h4>
-										<div>
-											<?php esc_html_e('If you want to contact Daisuke Takahashi(Extend Wings), you can use:', 'opcache'); ?>
-											<ul class="contact-list">
-												<li>
-													<?php printf(
-														'<a href="%1$s" target="_blank">%2$s</a> %3$s',
-														'https://wordpress.org/support/plugin/opcache',
-														esc_html__('Plugin Support Forum', 'opcache'),
-														esc_html__('(This forum is visible for everyone.)', 'opcache')
-													); ?>
-												</li>
-												<li>
-													<?php printf(
-														esc_html__('%1$sFor Confidential information%2$s, %3$s or %4$s is recommended due to security considerations.', 'opcache'),
-														'<strong>',
-														'</strong>',
-														sprintf(
-															'<a href="https://plus.google.com/+DaisukeTakahashi0120" target="_blank">%s</a>',
-															esc_html__('Google Hangouts (Message)', 'opcache')
-														),
-														sprintf(
-															'<a href="https://www.facebook.com/messages/daisuke.takahashi.0120" target="_blank">%s</a>',
-															esc_html__('Facebook Message', 'opcache')
-														)
-													); ?>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="info-widget">
-										<h4>
-											<span class="genericon genericon-github"></span>
-											<img id="github-logo" src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'images/github.svg'); ?>">
-										</h4>
-										<p>
-											<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=watch&count=true'); ?>" style="width: 85px;"></iframe>
-											<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=fork&count=true'); ?>" style="width: 85px;"></iframe>
-											<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&type=follow'); ?>" style="width: 135px;"></iframe>
-										</p>
-									</div>
-									<div class="info-widget">
-										<h4><?php esc_html_e('Feedback', 'opcache'); ?></h4>
-										<p>
-											<?php printf(
-												'We are waiting for your feedback at %1$sPlugin Review%2$s.',
-												'<a href="https://wordpress.org/support/view/plugin-reviews/opcache" target="_blank">',
-												'</a>'
-											); ?>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php do_meta_boxes($screen->id, 'normal', null); ?>
 					</div>
 					<div id="postbox-container-2" class="postbox-container">
-						<div class="meta-box-sortables ui-sortable">
-							<div class="postbox">
-								<div class="inside">
-									<form id="graph_ctrl">
-										<label><input type="radio" name="dataset" value="memory" checked><?php esc_html_e('Memory', 'opcache'); ?></label>
-										<label><input type="radio" name="dataset" value="keys"><?php esc_html_e('Keys', 'opcache'); ?></label>
-										<label><input type="radio" name="dataset" value="hits"><?php esc_html_e('Hits', 'opcache'); ?></label>
-									</form>
-									<div id="graph">
-										<div id="stats"></div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php do_meta_boxes($screen->id, 'side', null); ?>
+					</div>
+					<div id='postbox-container-3' class='postbox-container'>
+						<div id="column3-sortables" class="meta-box-sortables"></div>
+					</div>
+					<div id='postbox-container-4' class='postbox-container'>
+						<div id="column4-sortables" class="meta-box-sortables"></div>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -339,6 +249,150 @@ class OPcache_dashboard {
 				hits:['<?php esc_html_e('Misses', 'opcache'); ?>', '<?php esc_html_e('Cache Hits', 'opcache'); ?>', 0]
 			};
 		</script>
+		<?php
+	}
+
+	function widget_version_info() {
+		$config = &$this->data["config"];
+		$stats = &$this->data["status"]['opcache_statistics'];
+		$mem_stats = &$this->data["status"]['memory_usage'];
+		?>
+			<p id="hits">
+				<?php printf('Hits: %s%%', $this->number_format($stats['opcache_hit_rate'], 2)); ?>
+			</p>
+			<p id="memory">
+				<?php printf(
+					'Memory: %1$s of %2$s',
+					$this->size($mem_stats['used_memory'] + $mem_stats['wasted_memory']),
+					$this->size($config['directives']['opcache.memory_consumption'])
+				); ?>
+			</p>
+			<p id="keys">
+				<?php printf(
+					'Keys: %1$s of %2$s', $stats['num_cached_keys'], $stats['max_cached_keys']); ?>
+			</p>
+		<?php
+	}
+
+	function widget_ctrl() {
+		$config = &$this->data["config"];
+		$stats = &$this->data["status"]['opcache_statistics'];
+		$mem_stats = &$this->data["status"]['memory_usage'];
+
+		function make_button($label, $action, $level = 'low') {
+			printf(
+				'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
+				esc_url(admin_url(sprintf(
+						'admin.php?page=%1$s&action=%2$s&_wpnonce=%3$s&_wp_http_referer=%4$s',
+						$_REQUEST['page'],
+						$action,
+						wp_create_nonce('opcache_ctrl'),
+						urlencode(wp_unslash($_SERVER['REQUEST_URI']))
+				))),
+				$label
+			);
+		}
+		make_button(esc_html__('Reset', 'opcache'), 'reset', 'high');
+		make_button(esc_html__('Invalidate', 'opcache'), 'invalidate');
+		make_button(esc_html__('Force Invalidate', 'opcache'), 'invalidate_force');
+		?>
+			<p><strong><?php esc_html_e('These actions affect all cached opcodes.' ,'opcache'); ?></strong></p>
+			<p>
+				<?php printf(
+					esc_html__('Please refer to %s for these difference information.', 'opcache'),
+					sprintf('<a href="%1$s" target="_blank">%2$s</a>',
+						esc_url(OPcache_dashboard::PHP_URL . '/ref.opcache'),
+						esc_html__('the PHP.net', 'opcache')
+					)
+				); ?>
+			</p>
+		<?php
+	}
+
+	function widget_info_widget() {
+		?>
+			<div class="info-widget">
+				<h4><?php esc_html_e('Copyright', 'opcache'); ?></h4>
+				<p>
+					&copy;2012-2014 <a href="http://www.extendwings.com/" target="_blank">Daisuke Takahashi(Extend Wings)</a>
+					Portions &copy;2010-2012 Web Online.
+				</p>
+				<p>
+					<?php printf(
+						esc_html__('This software is licensed under %s.', 'opcache'),
+						sprintf(
+							'<a href="%1$s"><img id="agpl-logo" src="%2$s" alt="GNU AFFERO GENERAL PUBLIC LICENSE, Version 3"></a>',
+							esc_url(plugin_dir_url(__FILE__) . 'LICENSE'),
+							esc_url(plugin_dir_url(__FILE__) . 'images/agpl.svg')
+						)
+					); ?>
+				</p>
+			</div>
+			<div class="info-widget">
+				<h4><?php esc_html_e('Contact', 'opcache'); ?></h4>
+				<div>
+					<?php esc_html_e('If you want to contact Daisuke Takahashi(Extend Wings), you can use:', 'opcache'); ?>
+					<ul class="contact-list">
+						<li>
+							<?php printf(
+								'<a href="%1$s" target="_blank">%2$s</a> %3$s',
+								'https://wordpress.org/support/plugin/opcache',
+								esc_html__('Plugin Support Forum', 'opcache'),
+								esc_html__('(This forum is visible for everyone.)', 'opcache')
+							); ?>
+						</li>
+						<li>
+							<?php printf(
+								esc_html__('%1$sFor Confidential information%2$s, %3$s or %4$s is recommended due to security considerations.', 'opcache'),
+								'<strong>',
+								'</strong>',
+								sprintf(
+									'<a href="https://plus.google.com/+DaisukeTakahashi0120" target="_blank">%s</a>',
+									esc_html__('Google Hangouts (Message)', 'opcache')
+								),
+								sprintf(
+									'<a href="https://www.facebook.com/messages/daisuke.takahashi.0120" target="_blank">%s</a>',
+									esc_html__('Facebook Message', 'opcache')
+								)
+							); ?>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="info-widget">
+				<h4>
+					<span class="genericon genericon-github"></span>
+					<img id="github-logo" src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'images/github.svg'); ?>">
+				</h4>
+				<p>
+					<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=watch&count=true'); ?>" style="width: 85px;"></iframe>
+					<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=fork&count=true'); ?>" style="width: 85px;"></iframe>
+					<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&type=follow'); ?>" style="width: 135px;"></iframe>
+				</p>
+			</div>
+			<div class="info-widget">
+				<h4><?php esc_html_e('Feedback', 'opcache'); ?></h4>
+				<p>
+					<?php printf(
+						'We are waiting for your feedback at %1$sPlugin Review%2$s.',
+						'<a href="https://wordpress.org/support/view/plugin-reviews/opcache" target="_blank">',
+						'</a>'
+					); ?>
+				</p>
+			</div>
+		<?php
+	}
+
+	function widget_graph() {
+		?>
+			<form id="graph_ctrl">
+				<label><input type="radio" name="dataset" value="memory" checked><?php esc_html_e('Memory', 'opcache'); ?></label>
+				<label><input type="radio" name="dataset" value="keys"><?php esc_html_e('Keys', 'opcache'); ?></label>
+				<label><input type="radio" name="dataset" value="hits"><?php esc_html_e('Hits', 'opcache'); ?></label>
+			</form>
+			<div id="graph">
+				<div id="stats"></div>
+			</div>
 		<?php
 	}
 
