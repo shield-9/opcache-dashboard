@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
  * Plugin Name: OPcache Dashboard
  * Plugin URI: http://wordpress.org/plugins/opcache/
