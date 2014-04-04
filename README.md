@@ -3,7 +3,7 @@
 * **Donate link**: http://www.extendwings.com/donate/
 * **Tags**: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 * **Requires at least**: 3.8
-* **Tested up to**: 3.9-beta1-27604
+* **Tested up to**: 3.9-beta3-27857
 * **Stable tag**: 0.2.1
 * **License**: AGPLv3 or later
 * **License URI**: http://www.gnu.org/licenses/agpl.txt
@@ -73,7 +73,9 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 
 ## Frequently Asked Questions
 
-### There is nothing.
+### This plugin is broken! You're scum!
+First of all, we supports PHP 5.4+, MySQL 5.5+, WordPress 3.8+. Old software(vulnerable!) is not supported.
+If you're in supported environment, please create [pull request](https://github.com/shield-9/opcache-dashboard/compare/) or [issue](https://github.com/shield-9/opcache-dashboard/issues/new).
 
 ## Screenshots
 
@@ -81,6 +83,11 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 2. Status Page
 
 ## Changelog
+
+### 0.2.2
+* This version is compatible with sortable widget UI. Drag, Drop, Collapse, and Expand is supported
+* D3.js is updated from 3.4.2 to 3.4.3
+* Auto deactivation for older WordPress(~3.7.x). Compatible with MP6 Admin theme!
 
 ### 0.2.1
 * Minor Bug Fix See [GitHub](https://github.com/shield-9/opcache-dashboard).
@@ -95,6 +102,12 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 * Initial Beta Release
 
 ## Upgrade Notice
+
+### 0.2.2
+* None
+
+### 0.2.1
+* None
 
 ### 0.2.0
 * None
