@@ -495,7 +495,7 @@ class OPcache_dashboard {
 		if(plugin_basename(__FILE__) === $file) {
 			$links[] = sprintf(
 				'<a href="%s">%s</a>',
-				admin_url('admin.php?page=opcache'),
+				(is_network_admin() ? network_admin_url('admin.php?page=opcache') : admin_url('admin.php?page=opcache')),
 				__('Dashboard', 'opcache')
 			);
 			$links[] = sprintf(
