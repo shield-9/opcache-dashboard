@@ -16,6 +16,11 @@ if(!function_exists('add_action')) {
 	exit;
 }
 
+if(version_compare(get_bloginfo('version'), '3.8', '<')) {
+	require_once(ABSPATH.'wp-admin/includes/plugin.php');
+	deactivate_plugins(__FILE__);
+}
+
 if(!class_exists('WP_List_Table')) {
 	require_once(ABSPATH.'wp-admin/includes/class-wp-list-table.php');
 }
