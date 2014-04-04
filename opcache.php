@@ -258,9 +258,9 @@ class OPcache_dashboard {
 	}
 
 	function widget_version_info() {
-		$config = &$this->data["config"];
-		$stats = &$this->data["status"]['opcache_statistics'];
-		$mem_stats = &$this->data["status"]['memory_usage'];
+		$config = $this->data["config"];
+		$stats = $this->data["status"]['opcache_statistics'];
+		$mem_stats = $this->data["status"]['memory_usage'];
 		?>
 			<p id="hits">
 				<?php printf('Hits: %s%%', $this->number_format($stats['opcache_hit_rate'], 2)); ?>
@@ -280,10 +280,6 @@ class OPcache_dashboard {
 	}
 
 	function widget_ctrl() {
-		$config = &$this->data["config"];
-		$stats = &$this->data["status"]['opcache_statistics'];
-		$mem_stats = &$this->data["status"]['memory_usage'];
-
 		function make_button($label, $action, $level = 'low') {
 			printf(
 				'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
@@ -297,6 +293,7 @@ class OPcache_dashboard {
 				$label
 			);
 		}
+
 		make_button(esc_html__('Reset', 'opcache'), 'reset', 'high');
 		make_button(esc_html__('Invalidate', 'opcache'), 'invalidate');
 		make_button(esc_html__('Force Invalidate', 'opcache'), 'invalidate_force');
