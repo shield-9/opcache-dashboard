@@ -73,7 +73,7 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 
 == Frequently Asked Questions ==
 
-= This plugin is broken! You're scum! =
+= This plugin is broken! Thanks for nothing! =
 First of all, we supports PHP 5.4+, MySQL 5.5+, WordPress 3.8+. Old software(vulnerable!) is not supported.
 If you're in supported environment, please create [pull request](https://github.com/shield-9/opcache-dashboard/compare/) or [issue](https://github.com/shield-9/opcache-dashboard/issues/new).
 
