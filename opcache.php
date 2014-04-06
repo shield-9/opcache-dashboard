@@ -280,11 +280,11 @@ class OPcache_dashboard {
 	}
 
 	function widget_ctrl() {
-		function make_button($label, $action, $level = 'low') {
+		function make_button($label, $action, $referer = false, $level = 'low') {
 			printf(
 				'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
 				esc_url(admin_url(sprintf(
-						'admin.php?page=%1$s&action=%2$s&_wpnonce=%3$s&_wp_http_referer=%4$s',
+						'admin.php?page=%1$s&action=%2$s&_wpnonce=%3$s' . ($referer ? '&_wp_http_referer=%4$s' : NULL),
 						$_REQUEST['page'],
 						$action,
 						wp_create_nonce('opcache_ctrl'),
@@ -294,7 +294,7 @@ class OPcache_dashboard {
 			);
 		}
 
-		make_button(esc_html__('Reset', 'opcache'), 'reset', 'high');
+		make_button(esc_html__('Reset', 'opcache'), 'reset', true, 'high');
 		make_button(esc_html__('Invalidate', 'opcache'), 'invalidate');
 		make_button(esc_html__('Force Invalidate', 'opcache'), 'invalidate_force');
 		?>
