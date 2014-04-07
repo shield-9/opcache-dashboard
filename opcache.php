@@ -109,7 +109,7 @@ class OPcache_dashboard {
 			'opcache-config',				// menu_slug,
 			array(&$this, 'render_admin_config_page')	// function
 		);
-		if(version_compare(PHP_VERSION, '5.5.5'))
+		if(version_compare(PHP_VERSION, '5.5.5') >= 0)
 			add_submenu_page(
 				'opcache',					// parent_slug,
 				__('Manual Cache Control', 'opcache'),		// page_title
