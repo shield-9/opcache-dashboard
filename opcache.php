@@ -109,6 +109,15 @@ class OPcache_dashboard {
 			'opcache-config',				// menu_slug,
 			array(&$this, 'render_admin_config_page')	// function
 		);
+		if(version_compare(PHP_VERSION, '5.5.5'))
+			add_submenu_page(
+				'opcache',					// parent_slug,
+				__('Manual Cache Control', 'opcache'),		// page_title
+				__('Manual Control', 'opcache'),		// menu_title,
+				'manage_options',				// capability,
+				'opcache-manual',				// menu_slug,
+				array(&$this, 'render_admin_manual_page')	// function
+			);
 
 		add_action('admin_enqueue_scripts', array(&$this, 'admin_menu_assets'));
 	}
@@ -439,6 +448,73 @@ class OPcache_dashboard {
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
 				<?php $list_table->display() ?>
+			</form>
+		</div><!-- wrap -->
+		<?php
+	}
+
+	function render_admin_manual_page() {
+		if(isset($_POST['action']) && isset($_POST['_wpnonce']) && check_admin_referer('opcache_ctrl','_wpnonce')) {
+			switch($_POST['action']) {
+				case 'compile':
+					if(isset($_POST['file']) && file_exists($_POST['file']) && !is_dir($_POST['file'])) {
+						if(version_compare(PHP_VERSION, '5.5.11') < 0 or !opcache_is_script_cached($_POST['file'])) {
+							opcache_compile_file($_POST['file']);
+							printf('<div class="updated"><p>%s</p></div>', esc_html__('Compiled!', 'opcache'));
+						} else
+							printf('<div class="error"><p>%s</p></div>', esc_html__('The script is already cached.', 'opcache'));
+					} else
+						printf('<div class="error"><p>%s</p></div>', esc_html__('No such file or directory.', 'opcache'));
+					break;
+				case 'invalidate':
+					if(isset($_POST['file']) && file_exists($_POST['file']) && !is_dir($_POST['file'])) {
+						if(version_compare(PHP_VERSION, '5.5.11') < 0 or opcache_is_script_cached($_POST['file'])) {
+							if(isset($_POST['force']) && $_POST['force'] == 'on') {
+								opcache_invalidate($_POST['file'], true);
+								printf('<div class="updated"><p>%s</p></div>', esc_html__('Force Invalidated!', 'opcache'));
+							} else {
+								opcache_invalidate($_POST['file']);
+								printf('<div class="updated"><p>%s</p></div>', esc_html__('Invalidated!', 'opcache'));
+							}
+						} else
+							printf('<div class="error"><p>%s</p></div>', esc_html__('The script is not cached yet.', 'opcache'));
+					} else
+						printf('<div class="error"><p>%s</p></div>', esc_html__('No such file or directory.', 'opcache'));
+					break;
+			}
+		}
+		?>
+		<div class="wrap">
+			<h2><?php _e('OPcache Manual Cache Control', 'opcache'); ?></h2>
+			<h3><?php _e('Compile File', 'opcache'); ?></h3>
+			<form method="post">
+				<input name="action" type="hidden" value="compile" />
+				<?php wp_nonce_field('opcache_ctrl'); ?>
+				<table class="form-table">
+					<tr class="form-field form-required">
+						<th scope="row"><label for="compile-file">File Path to compile</label></th>
+						<td><input name="file" type="text" id="compile-file" /></td>
+				</table>
+				<p class="submit"><input type="submit" name="compile" class="button button-primary" value="Compile" />
+			</form>
+			<h3><?php _e('Invalidate File', 'opcache'); ?></h3>
+			<form method="post">
+				<input name="action" type="hidden" value="invalidate" />
+				<?php wp_nonce_field('opcache_ctrl'); ?>
+				<table class="form-table">
+					<tr class="form-field form-required">
+						<th scope="row"><label for="invalidate-file">File Path to invalidate</label></th>
+						<td><input name="file" type="text" id="invalidate-file" /></td>
+					<tr>
+						<th scope="row"><label for="invalidate-force">Force Invalidate</label></th>
+						<td>
+							<label>
+								<input type="checkbox" name="force" id="invalidate-force" checked>
+								The script will be invalidated regardless of whether invalidation is necessary.
+							</label>
+						</td>
+				</table>
+				<p class="submit"><input type="submit" name="invalidate" class="button button-primary" value="Invalidate" />
 			</form>
 		</div><!-- wrap -->
 		<?php
