@@ -21,9 +21,8 @@ if(version_compare(get_bloginfo('version'), '3.8', '<')) {
 	deactivate_plugins(__FILE__);
 }
 
-if(!class_exists('WP_List_Table')) {
+if(!class_exists('WP_List_Table'))
 	require_once(ABSPATH.'wp-admin/includes/class-wp-list-table.php');
-}
 
 add_action('init', array('OPcache_dashboard', 'init'));
 class OPcache_dashboard {
@@ -158,18 +157,6 @@ class OPcache_dashboard {
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
 
-		/*
-		add_meta_box(
-			$widget_id,	// widget_id
-			$widget_name,	// widget_name
-			$callback,	// callback
-			$screen,	// screen
-			$location,	// location
-			$priority,	// priority
-			$callback_args	// callback_args
-		);
-		*/
-
 		add_meta_box(
 			'version-info',				// widget_id
 			sprintf(
@@ -262,20 +249,13 @@ class OPcache_dashboard {
 		$stats = $this->data["status"]['opcache_statistics'];
 		$mem_stats = $this->data["status"]['memory_usage'];
 		?>
-			<p id="hits">
-				<?php printf('Hits: %s%%', $this->number_format($stats['opcache_hit_rate'], 2)); ?>
-			</p>
-			<p id="memory">
-				<?php printf(
+			<p id="hits"><?php printf('Hits: %s%%', $this->number_format($stats['opcache_hit_rate'], 2)); ?>
+			<p id="memory"><?php printf(
 					'Memory: %1$s of %2$s',
 					$this->size($mem_stats['used_memory'] + $mem_stats['wasted_memory']),
 					$this->size($config['directives']['opcache.memory_consumption'])
 				); ?>
-			</p>
-			<p id="keys">
-				<?php printf(
-					'Keys: %1$s of %2$s', $stats['num_cached_keys'], $stats['max_cached_keys']); ?>
-			</p>
+			<p id="keys"><?php printf('Keys: %1$s of %2$s', $stats['num_cached_keys'], $stats['max_cached_keys']); ?>
 		<?php
 	}
 
@@ -283,13 +263,12 @@ class OPcache_dashboard {
 		function make_button($label, $action, $referer = false, $level = 'low') {
 			printf(
 				'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
-				esc_url(admin_url(sprintf(
-						'admin.php?page=%1$s&action=%2$s&_wpnonce=%3$s' . ($referer ? '&_wp_http_referer=%4$s' : NULL),
-						$_REQUEST['page'],
-						$action,
-						wp_create_nonce('opcache_ctrl'),
-						urlencode(wp_unslash($_SERVER['REQUEST_URI']))
-				))),
+				wp_nonce_url(admin_url(sprintf(
+					'admin.php?page=%1$s&action=%2$s' . ($referer ? '&_wp_http_referer=%3$s' : NULL),
+					$_REQUEST['page'],
+					$action,
+					urlencode(wp_unslash($_SERVER['REQUEST_URI']))
+				)), 'opcache_ctrl'),
 				$label
 			);
 		}
@@ -298,7 +277,7 @@ class OPcache_dashboard {
 		make_button(esc_html__('Invalidate', 'opcache'), 'invalidate');
 		make_button(esc_html__('Force Invalidate', 'opcache'), 'invalidate_force');
 		?>
-			<p><strong><?php esc_html_e('These actions affect all cached opcodes.' ,'opcache'); ?></strong></p>
+			<p><strong><?php esc_html_e('These actions affect all cached opcodes.' ,'opcache'); ?></strong>
 			<p>
 				<?php printf(
 					esc_html__('Please refer to %s for these difference information.', 'opcache'),
@@ -307,7 +286,6 @@ class OPcache_dashboard {
 						esc_html__('the PHP.net', 'opcache')
 					)
 				); ?>
-			</p>
 		<?php
 	}
 
@@ -318,7 +296,6 @@ class OPcache_dashboard {
 				<p>
 					&copy;2012-2014 <a href="http://www.extendwings.com/" target="_blank">Daisuke Takahashi(Extend Wings)</a>
 					Portions &copy;2010-2012 Web Online.
-				</p>
 				<p>
 					<?php printf(
 						esc_html__('This software is licensed under %s.', 'opcache'),
@@ -328,7 +305,6 @@ class OPcache_dashboard {
 							esc_url(plugin_dir_url(__FILE__) . 'images/agpl.svg')
 						)
 					); ?>
-				</p>
 			</div>
 			<div class="info-widget">
 				<h4><?php esc_html_e('Contact', 'opcache'); ?></h4>
@@ -342,7 +318,6 @@ class OPcache_dashboard {
 								esc_html__('Plugin Support Forum', 'opcache'),
 								esc_html__('(This forum is visible for everyone.)', 'opcache')
 							); ?>
-						</li>
 						<li>
 							<?php printf(
 								esc_html__('%1$sFor Confidential information%2$s, %3$s or %4$s is recommended due to security considerations.', 'opcache'),
@@ -357,20 +332,18 @@ class OPcache_dashboard {
 									esc_html__('Facebook Message', 'opcache')
 								)
 							); ?>
-						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="info-widget">
 				<h4>
 					<span class="genericon genericon-github"></span>
-					<img id="github-logo" src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'images/github.svg'); ?>">
+					<img id="github-logo" alt="GitHub Logo" src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'images/github.svg'); ?>">
 				</h4>
 				<p>
 					<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=watch&count=true'); ?>" style="width: 85px;"></iframe>
 					<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=fork&count=true'); ?>" style="width: 85px;"></iframe>
 					<iframe class="github-button" seamless src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'github-btn.html?user=shield-9&type=follow'); ?>" style="width: 135px;"></iframe>
-				</p>
 			</div>
 			<div class="info-widget">
 				<h4><?php esc_html_e('Feedback', 'opcache'); ?></h4>
@@ -380,7 +353,6 @@ class OPcache_dashboard {
 						'<a href="https://wordpress.org/support/view/plugin-reviews/opcache" target="_blank">',
 						'</a>'
 					); ?>
-				</p>
 			</div>
 		<?php
 	}
@@ -420,7 +392,8 @@ class OPcache_dashboard {
 		$list_table = new OPcache_List_Table($status);
 		$list_table->prepare_items();
 		?>
-		<div class="wrap"><h2><?php _e('OPcache Status', 'opcache'); ?></h2>
+		<div class="wrap">
+			<h2><?php _e('OPcache Status', 'opcache'); ?></h2>
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
 				<?php $list_table->display() ?>
@@ -436,7 +409,8 @@ class OPcache_dashboard {
 		$list_table = new OPcache_List_Table($status['scripts']);
 		$list_table->prepare_items();
 		?>
-		<div class="wrap"><h2><?php _e('OPcache Scripts', 'opcache'); ?></h2>
+		<div class="wrap">
+			<h2><?php _e('OPcache Scripts', 'opcache'); ?></h2>
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
 				<?php $list_table->display() ?>
@@ -460,7 +434,8 @@ class OPcache_dashboard {
 		$list_table = new OPcache_List_Table($config);
 		$list_table->prepare_items();
 		?>
-		<div class="wrap"><h2><?php _e('OPcache Configurations', 'opcache'); ?></h2>
+		<div class="wrap">
+			<h2><?php _e('OPcache Configurations', 'opcache'); ?></h2>
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
 				<?php $list_table->display() ?>
