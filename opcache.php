@@ -21,7 +21,7 @@ if(version_compare(get_bloginfo('version'), '3.8', '<')) {
 	deactivate_plugins(__FILE__);
 }
 
-if(!class_exists('WP_List_Table')
+if(!class_exists('WP_List_Table'))
 	require_once(ABSPATH.'wp-admin/includes/class-wp-list-table.php');
 
 add_action('init', array('OPcache_dashboard', 'init'));
