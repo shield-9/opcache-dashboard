@@ -3,7 +3,7 @@
  * Plugin Name: OPcache Dashboard
  * Plugin URI: http://wordpress.org/plugins/opcache/
  * Description: OPcache dashboard designed for WordPress
- * Version: 0.2.1
+ * Version: 0.2.2beta1
  * Author: Daisuke Takahashi(Extend Wings)
  * Author URI: http://www.extendwings.com
  * License: AGPLv3 or later
@@ -30,7 +30,7 @@ class OPcache_dashboard {
 
 	const PHP_URL = 'http://php.shield-9.org';
 
-	const VERSION = '0.2.0';
+	const VERSION = '0.2.2beta1';
 	
 	private $data;
 	private $hooks;
@@ -58,7 +58,7 @@ class OPcache_dashboard {
 	function register_assets() {
 		if(is_admin()) {
 			if(!wp_script_is('d3js', 'registered'))
-				wp_register_script('d3js', plugin_dir_url(__FILE__).'js/d3.min.js', false, '3.4.2');
+				wp_register_script('d3js', plugin_dir_url(__FILE__).'js/d3.min.js', false, '3.4.4');
 			if(!wp_script_is('opcache', 'registered'))
 				wp_register_script('opcache', plugin_dir_url(__FILE__).'js/chart.js', array('jquery', 'd3js'), self::VERSION, true);
 			if(!wp_script_is('jquery-center', 'registered'))
