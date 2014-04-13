@@ -33,6 +33,7 @@ class OPcache_dashboard {
 	const VERSION = '0.2.0';
 	
 	private $data;
+	private $hooks;
 
 	static function init() {
 		if(!self::$instance) {
@@ -70,7 +71,7 @@ class OPcache_dashboard {
 	}
 
 	function add_admin_menu() {
-		add_menu_page(
+		$this->hooks[] = add_menu_page(
 			__('OPcache Dashboard', 'opcache'),	// page_title
 			__('OPcache', 'opcache'),		// menu_title
 			'manage_options',			// capability
@@ -79,7 +80,7 @@ class OPcache_dashboard {
 			'dashicons-backup',			// icon_url
 			'3.14159265359'				// position
 		);
-		add_submenu_page(
+		$this->hooks[] = add_submenu_page(
 			'opcache',				// parent_slug,
 			__('OPcache Dashboard', 'opcache'),	// page_title
 			__('Dashboard', 'opcache'),		// menu_title,
@@ -87,7 +88,7 @@ class OPcache_dashboard {
 			'opcache',				// menu_slug,
 			array(&$this, 'admin_page')		// function
 		);
-		add_submenu_page(
+		$this->hooks[] = add_submenu_page(
 			'opcache',					// parent_slug,
 			__('Status', 'opcache'),			// page_title
 			__('Status', 'opcache'),			// menu_title,
@@ -95,7 +96,7 @@ class OPcache_dashboard {
 			'opcache-status',				// menu_slug,
 			array(&$this, 'render_admin_status_page')	// function
 		);
-		add_submenu_page(
+		$this->hooks[] = add_submenu_page(
 			'opcache',					// parent_slug,
 			__('Scripts', 'opcache'),			// page_title
 			__('Scripts', 'opcache'),			// menu_title,
@@ -103,7 +104,7 @@ class OPcache_dashboard {
 			'opcache-scripts',				// menu_slug,
 			array(&$this, 'render_admin_scripts_page')	// function
 		);
-		add_submenu_page(
+		$this->hooks[] = add_submenu_page(
 			'opcache',					// parent_slug,
 			__('Configuration', 'opcache'),			// page_title
 			__('Configuration', 'opcache'),			// menu_title,
@@ -112,7 +113,7 @@ class OPcache_dashboard {
 			array(&$this, 'render_admin_config_page')	// function
 		);
 		if(version_compare(PHP_VERSION, '5.5.5') >= 0)
-			add_submenu_page(
+			$this->hooks[] = add_submenu_page(
 				'opcache',					// parent_slug,
 				__('Manual Cache Control', 'opcache'),		// page_title
 				__('Manual Control', 'opcache'),		// menu_title,
@@ -125,8 +126,11 @@ class OPcache_dashboard {
 	}
 
 	function admin_menu_assets($hook) {
-		wp_enqueue_style('opcache');
-		wp_enqueue_style('genericons');
+		if(in_array($hook, $this->hooks)) {
+			wp_enqueue_style('opcache');
+			wp_enqueue_style('genericons');
+		}
+
 		switch($hook) {
 			case 'toplevel_page_opcache':
 				wp_enqueue_script('opcache');
@@ -135,8 +139,8 @@ class OPcache_dashboard {
 			case 'opcache_page_opcache-scripts':
 			case 'opcache_page_opcache-status':
 			case 'opcache_page_opcache-config':
+			case 'opcache_page_opcache-manual':
 		}
-		return;
 	}
 
 	function admin_page() {
