@@ -55,16 +55,18 @@ class OPcache_dashboard {
 	}
 
 	function register_assets() {
-		if(!wp_script_is('d3js', 'registered'))
-			wp_register_script('d3js', plugin_dir_url(__FILE__).'js/d3.min.js', false, '3.4.2');
-		if(!wp_script_is('opcache', 'registered'))
-			wp_register_script('opcache', plugin_dir_url(__FILE__).'js/chart.js', array('jquery', 'd3js'), self::VERSION, true);
-		if(!wp_script_is('jquery-center', 'registered'))
-			wp_register_script('jquery-center', plugin_dir_url(__FILE__).'js/jquery.center.min.js', array('jquery'), '1.1.1');
-		if(!wp_style_is('opcache', 'registered'))
-			wp_register_style('opcache', plugin_dir_url(__FILE__).'css/style.css', false, self::VERSION);
-		if(!wp_style_is('genericons', 'registered'))
-			wp_register_style('genericons', plugin_dir_url(__FILE__).'css/genericons.css', false, '3.0.3');
+		if(is_admin()) {
+			if(!wp_script_is('d3js', 'registered'))
+				wp_register_script('d3js', plugin_dir_url(__FILE__).'js/d3.min.js', false, '3.4.2');
+			if(!wp_script_is('opcache', 'registered'))
+				wp_register_script('opcache', plugin_dir_url(__FILE__).'js/chart.js', array('jquery', 'd3js'), self::VERSION, true);
+			if(!wp_script_is('jquery-center', 'registered'))
+				wp_register_script('jquery-center', plugin_dir_url(__FILE__).'js/jquery.center.min.js', array('jquery'), '1.1.1');
+			if(!wp_style_is('opcache', 'registered'))
+				wp_register_style('opcache', plugin_dir_url(__FILE__).'css/style.css', false, self::VERSION);
+			if(!wp_style_is('genericons', 'registered'))
+				wp_register_style('genericons', plugin_dir_url(__FILE__).'css/genericons.css', false, '3.0.3');
+		}
 	}
 
 	function add_admin_menu() {
