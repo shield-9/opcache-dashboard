@@ -154,7 +154,7 @@ class OPcache_dashboard {
 					break;
 				case 'invalidate':
 					$status = opcache_get_status();
-					foreach($status['script'] as $script)
+					foreach($status['scripts'] as $script)
 						opcache_invalidate($script['full_path']);
 					printf('<div class="updated"><p>%s</p></div>', esc_html__('Invalidated!', 'opcache'));
 					break;
