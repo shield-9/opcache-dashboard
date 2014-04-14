@@ -53,8 +53,8 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 	* Licensed under [the BSD 3-Clause License](https://raw2.github.com/mbostock/d3/04fa5dd3856de768b43b4aac9e34c112f1227a17/LICENSE)
 	* Copy license text is also available as *js/d3.license*
 	* Fetched from [mbostock/d3](https://github.com/mbostock/d3)
-	* Version: 3.4.2
-	* Commit: [a4bd16705e2a054f570310d6a8adac663923ab92](https://github.com/mbostock/d3/commit/a4bd16705e2a054f570310d6a8adac663923ab92)
+	* Version: 3.4.6
+	* Commit: [49ba8afebb2ae813ab66dc2f48f533aa7f333c3c](https://github.com/mbostock/d3/commit/49ba8afebb2ae813ab66dc2f48f533aa7f333c3c)
 
 #### Apache License, Version 2.0
 * github-btn.html
