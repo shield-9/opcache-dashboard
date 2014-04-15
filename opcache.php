@@ -166,8 +166,8 @@ class OPcache_dashboard {
 					break;
 			}
 		}
-		$config = $this->data["config"] = opcache_get_configuration();
-		$status = $this->data["status"] = opcache_get_status(false);
+		$config = $this->data['config'] = opcache_get_configuration();
+		$status = $this->data['status'] = opcache_get_status(false);
 		$stats = $status['opcache_statistics'];
 		$mem_stats = $status['memory_usage'];
 		$stats['num_free_keys'] = $stats['max_cached_keys'] - $stats['num_cached_keys'];
@@ -260,9 +260,9 @@ class OPcache_dashboard {
 	}
 
 	function widget_version_info() {
-		$config = $this->data["config"];
-		$stats = $this->data["status"]['opcache_statistics'];
-		$mem_stats = $this->data["status"]['memory_usage'];
+		$config = $this->data['config'];
+		$stats = $this->data['status']['opcache_statistics'];
+		$mem_stats = $this->data['status']['memory_usage'];
 		?>
 			<p id="hits"><?php printf('Hits: %s%%', $this->number_format($stats['opcache_hit_rate'], 2)); ?>
 			<p id="memory"><?php printf(
@@ -561,5 +561,3 @@ class OPcache_dashboard {
 		return $links;
 	}
 }
-
-?>
