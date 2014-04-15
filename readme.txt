@@ -1,10 +1,10 @@
 === OPcache Dashboard ===
-Contributors: extendwings,
+Contributors: extendwings, headonfire,
 Donate link: http://www.extendwings.com/donate/
 Tags: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 Requires at least: 3.8
-Tested up to: 3.9-beta3-27857
-Stable tag: 0.2.1
+Tested up to: 3.9
+Stable tag: 0.2.2
 License: AGPLv3 or later
 License URI: http://www.gnu.org/licenses/agpl.txt
 
@@ -85,18 +85,26 @@ If you're in supported environment, please create [pull request](https://github.
 == Changelog ==
 
 = 0.2.2 =
-* This version is compatible with sortable widget UI. Drag, Drop, Collapse, and Expand is supported
-* D3.js is updated from 3.4.2 to 3.4.3
-* Auto deactivation for older WordPress(~3.7.x). Compatible with MP6 Admin theme!
+* Bug Fix: `Invalidate` and `Force Invalidate` now works well.
+* Manual Cache Control Page is available. You can compile file without running.
+* Compatible with sortable widget UI! Drag, Drop, Collapse, and Expand is supported.
+* D3.js is updated. (3.4.2 -> 3.4.6)
+* Auto deactivation for older WordPress(~3.7.x). More compatible with MP6 Admin theme!
+* More on [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.2).
+* [`git diff 0.2.1...0.2.2`](https://github.com/shield-9/opcache-dashboard/compare/0.2.1...0.2.2)
+
+* **Contributor**: [Ihor Vorotnov](http://ihorvorotnov.com/) reported 3 issues!
 
 = 0.2.1 =
-* Minor Bug Fix See [GitHub](https://github.com/shield-9/opcache-dashboard).
+* Minor Bug Fix See [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.1).
+* [`git diff 0.2.0...0.2.1`](https://github.com/shield-9/opcache-dashboard/compare/0.2.0...0.2.1)
 
-= 0.2.0 =
+= 0.2.0=
 * Compatible with many kinds of screen, including Smartphone!
 * Better Main Dashboard Page
 * Now Status, Scripts and Configurations Pages are all available. This is one of the big progress.
-* There is more improvements. See [GitHub](https://github.com/shield-9/opcache-dashboard).
+* More on [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.0).
+* [`git diff 0.1.0...0.2.0`](https://github.com/shield-9/opcache-dashboard/compare/0.1.0...0.2.0)
 
 = 0.1.0 =
 * Initial Beta Release
