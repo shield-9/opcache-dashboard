@@ -3,7 +3,7 @@
  * Plugin Name: OPcache Dashboard
  * Plugin URI: http://wordpress.org/plugins/opcache/
  * Description: OPcache dashboard designed for WordPress
- * Version: 0.2.2beta1
+ * Version: 0.2.2-RC1
  * Author: Daisuke Takahashi(Extend Wings)
  * Author URI: http://www.extendwings.com
  * License: AGPLv3 or later
