@@ -60,7 +60,7 @@ class OPcache_List_Table extends WP_List_Table {
 		switch($column_name) {
 			case 'last_used_timestamp':
 			case 'timestamp':
-				return date(__('j M, Y @ G:i:s', 'opcache'), $item[$column_name]);
+				return isset($item[$column_name]) ? date(__('j M, Y @ G:i:s', 'opcache'), $item[$column_name]) : __('Not Set', 'opcache');
 			case 'memory_consumption':
 				return OPcache_dashboard::size($item[$column_name]);
 			default:
