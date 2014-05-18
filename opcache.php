@@ -53,6 +53,23 @@ class OPcache_dashboard {
 			add_action('network_admin_menu', array(&$this, 'add_admin_menu'));
 		add_action('wp_loaded', array(&$this, 'register_assets'));
 		add_filter('plugin_row_meta', array(&$this, 'plugin_row_meta'), 10, 2);
+		
+		// Reset all cache when Upgrader Process complete
+		add_action('upgrader_process_complete', array(&$this, 'version_up_reset'), 10, 2);
+	}
+
+	function version_up_reset() {
+		opcache_reset();
+
+		$hook_extra =  array(
+			'action' => 'update',
+			'type' => 'core',
+			'bulk' => true,
+		);
+		if(func_num_args() >= 2)
+			$hook_extra = array_merge($hook_extra, func_get_arg(2));
+
+		trigger_error("Your WordPress is successfully updated! Detail:\n".var_export($hook_extra, true), E_USER_NOTICE);
 	}
 
 	function register_assets() {
