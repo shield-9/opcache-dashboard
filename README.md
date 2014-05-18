@@ -4,7 +4,7 @@
 * **Tags**: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 * **Requires at least**: 3.8
 * **Tested up to**: 3.9
-* **Stable tag**: 0.2.2
+* **Stable tag**: 0.2.3
 * **License**: AGPLv3 or later
 * **License URI**: http://www.gnu.org/licenses/agpl.txt
 
@@ -64,7 +64,7 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 	* Modified for compatible with HTML5.
 	* Portions Copyright (c) 2014 Daisuke Takahashi(Extend Wings)
 	* Fetched from [mdo/github-buttons](https://github.com/mdo/github-buttons)
-	* Commit: [9648c59b3c9fa6e3b13818da48b75a95aa97b152](https://github.com/mdo/github-buttons/commit/9648c59b3c9fa6e3b13818da48b75a95aa97b152)
+	* Commit: [1d5c41ba98737deb5d0089c3917875ad14099227](https://github.com/mdo/github-buttons/commit/1d5c41ba98737deb5d0089c3917875ad14099227)
 
 ## Installation
 
@@ -86,6 +86,12 @@ If you're in supported environment, please create [pull request](https://github.
 2. Status Page
 
 ## Changelog
+
+### 0.2.3
+* WordPress Bug Fix: Reset all caches after updating WordPress Core/Plugins/Themes.
+* github-buttons is updated.
+* More on [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.3).
+* [`git diff 0.2.2...0.2.3`](https://github.com/shield-9/opcache-dashboard/compare/0.2.2...0.2.3)
 
 ### 0.2.2
 * Bug Fix: `Invalidate` and `Force Invalidate` now works well.
