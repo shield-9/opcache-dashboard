@@ -99,7 +99,7 @@ If you're in supported environment, please create [pull request](https://github.
 * Minor Bug Fix See [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.1).
 * [`git diff 0.2.0...0.2.1`](https://github.com/shield-9/opcache-dashboard/compare/0.2.0...0.2.1)
 
-= 0.2.0=
+= 0.2.0 =
 * Compatible with many kinds of screen, including Smartphone!
 * Better Main Dashboard Page
 * Now Status, Scripts and Configurations Pages are all available. This is one of the big progress.

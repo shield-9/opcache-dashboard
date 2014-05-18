@@ -164,22 +164,26 @@ class OPcache_dashboard {
 		$screen = get_current_screen();
 
 		if(isset($_GET['action']) && isset($_GET['_wpnonce']) && check_admin_referer('opcache_ctrl','_wpnonce')) {
+			$template = '<div class="updated"><p>%1$s <a href="%2$s">%3$s</a></p></div>';
+			$url = admin_url(sprintf('admin.php?page=%1$s', $_REQUEST['page']));
+			$link_text = esc_html__('Click here to refresh information', 'opcache');
+
 			switch($_GET['action']) {
 				case 'reset':
 					opcache_reset();
-					printf('<div class="updated"><p>%s</p></div>', esc_html__('Reseted!', 'opcache'));
+					printf($template, esc_html__('Reseted!', 'opcache'), $url, $link_text);
 					break;
 				case 'invalidate':
 					$status = opcache_get_status();
 					foreach($status['scripts'] as $script)
 						opcache_invalidate($script['full_path']);
-					printf('<div class="updated"><p>%s</p></div>', esc_html__('Invalidated!', 'opcache'));
+					printf($template, esc_html__('Invalidated!', 'opcache'), $url, $link_text);
 					break;
 				case 'invalidate_force':
 					$status = opcache_get_status();
 					foreach($status['scripts'] as $script)
 						opcache_invalidate($script['full_path'], true);
-					printf('<div class="updated"><p>%s</p></div>', esc_html__('Force Invalidated!', 'opcache'));
+					printf($template, esc_html__('Force Invalidated!', 'opcache'), $url, $link_text);
 					break;
 			}
 		}
