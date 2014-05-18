@@ -14,79 +14,78 @@
 </span>
 <script type="text/javascript">
 var params = function () {
-	var d = [],
-		c;
-	var a = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&");
-	for (var b = 0; b < a.length; b++) {
-		c = a[b].split("=");
-		d.push(c[0]);
-		d[c[0]] = c[1]
+	var vars = [], hash;
+	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	for(var i = 0; i < hashes.length; i++) {
+		hash = hashes[i].split('=');
+		vars.push(hash[0]);
+		vars[hash[0]] = hash[1];
 	}
-	return d
-}();
+	return vars;
+}()
 
 var user = params.user,
 	repo = params.repo,
 	type = params.type,
 	count = params.count,
 	size = params.size,
-	head = document.getElementsByTagName("head")[0],
-	button = document.getElementById("gh-btn"),
-	mainButton = document.getElementById("github-btn"),
-	text = document.getElementById("gh-text"),
-	counter = document.getElementById("gh-count");
+	head = document.getElementsByTagName('head')[0],
+	button = document.getElementById('gh-btn'),
+	mainButton = document.getElementById('github-btn'),
+	text = document.getElementById('gh-text'),
+	counter = document.getElementById('gh-count');
 
-function addCommas(a) {
-	return String(a).replace(/(\d)(?=(\d{3})+$)/g, "$1,")
+function addCommas(n) {
+	return String(n).replace(/(\d)(?=(\d{3})+$)/g, '$1,')
 }
 
-function jsonp(b) {
-	var a = document.createElement("script");
-	a.src = b + "?callback=callback";
-	head.insertBefore(a, head.firstChild)
+function jsonp(path) {
+	var el = document.createElement('script');
+	el.src = path + '?callback=callback';
+	head.insertBefore(el, head.firstChild);
 }
 
-function callback(a) {
-	if(type == "watch") {
-		counter.innerHTML = addCommas(a.data.watchers)
-	} else if(type == "fork") {
-		counter.innerHTML = addCommas(a.data.forks)
-	} else if (type == "follow") {
-		counter.innerHTML = addCommas(a.data.followers)
+function callback(obj) {
+	if(type == 'watch') {
+		counter.innerHTML = addCommas(obj.data.watchers);
+	} else if(type == 'fork') {
+		counter.innerHTML = addCommas(obj.data.forks);
+	} else if(type == 'follow') {
+		counter.innerHTML = addCommas(obj.data.followers);
 	}
 
-	if(count == "true") {
-		counter.style.display = "block"
+	if(count == 'true') {
+		counter.style.display = 'block';
 	}
 }
 
-button.href = "https://github.com/" + user + "/" + repo + "/";
+button.href = 'https://github.com/' + user + '/' + repo + '/';
 
-if(type == "watch") {
-	mainButton.className += " github-watchers";
-	text.innerHTML = "Star";
-	counter.href = "https://github.com/" + user + "/" + repo + "/stargazers"
+if(type == 'watch') {
+	mainButton.className += ' github-watchers';
+	text.innerHTML = 'Star';
+	counter.href = 'https://github.com/' + user + '/' + repo + '/stargazers';
 } else if(type == "fork") {
 	mainButton.className += " github-forks";
 	text.innerHTML = "Fork";
 	button.href = "https://github.com/" + user + "/" + repo + "/fork";
 	counter.href = "https://github.com/" + user + "/" + repo + "/network"
-} else if(type == "follow") {
-	mainButton.className += " github-me";
-	text.innerHTML = "Follow @" + user;
-	button.href = "https://github.com/" + user;
-	counter.href = "https://github.com/" + user + "/followers"
+} else if(type == 'follow') {
+	mainButton.className += ' github-me';
+	text.innerHTML = 'Follow @' + user;
+	button.href = 'https://github.com/' + user;
+	counter.href = 'https://github.com/' + user + '/followers';
 }
 
-if(size == "large") {
-	mainButton.className += " github-btn-large"
+if(size == 'large') {
+	mainButton.className += ' github-btn-large';
 }
 
-if(type == "follow") {
-	jsonp("https://api.github.com/users/" + user)
+if(type == 'follow') {
+	jsonp('https://api.github.com/users/' + user);
 } else {
-	jsonp("https://api.github.com/repos/" + user + "/" + repo)
-};
+	jsonp('https://api.github.com/repos/' + user + '/' + repo);
+}
 </script>
 </body>
 </html>
