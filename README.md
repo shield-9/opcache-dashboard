@@ -12,7 +12,10 @@
 
 ## Description
 
-As you know, OPcache has no management page. This plugins offers you the OPcache dashboard designed for WordPress.
+As you know, OPcache has no management page. This plugin offers you the OPcache dashboard designed for WordPress.
+
+Are you experiencing the problem using WordPress with OPcache? It may occur after Upgrading Core/Plugin/Theme.
+This plugin reset all cache after upgrading so that you don't have to see "Please update!" repeatedly.
 
 ***WARNING***:This is experimental and in development. All files in this repo is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE, Version 3](http://www.gnu.org/licenses/agpl.txt).
 
