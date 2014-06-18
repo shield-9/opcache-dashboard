@@ -165,7 +165,7 @@ class OPcache_dashboard {
 
 		if(isset($_GET['action']) && isset($_GET['_wpnonce']) && check_admin_referer('opcache_ctrl','_wpnonce')) {
 			$template = '<div class="updated"><p>%1$s <a href="%2$s">%3$s</a></p></div>';
-			$url = admin_url(sprintf('admin.php?page=%1$s', $_REQUEST['page']));
+			$url = is_network_admin() ? network_admin_url(sprintf('admin.php?page=%1$s', $_REQUEST['page'])) : admin_url(sprintf('admin.php?page=%1$s', $_REQUEST['page']));
 			$link_text = esc_html__('Click here to refresh information', 'opcache');
 
 			switch($_GET['action']) {
@@ -297,16 +297,29 @@ class OPcache_dashboard {
 
 	function widget_ctrl() {
 		function make_button($label, $action, $referer = false, $level = 'low') {
-			printf(
-				'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
-				wp_nonce_url(admin_url(sprintf(
-					'admin.php?page=%1$s&action=%2$s' . ($referer ? '&_wp_http_referer=%3$s' : NULL),
-					$_REQUEST['page'],
-					$action,
-					urlencode(wp_unslash($_SERVER['REQUEST_URI']))
-				)), 'opcache_ctrl'),
-				$label
-			);
+			if(is_network_admin()) {
+				printf(
+					'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
+					wp_nonce_url(network_admin_url(sprintf(
+						'admin.php?page=%1$s&action=%2$s' . ($referer ? '&_wp_http_referer=%3$s' : NULL),
+						$_REQUEST['page'],
+						$action,
+						urlencode(wp_unslash($_SERVER['REQUEST_URI']))
+					)), 'opcache_ctrl'),
+					$label
+				);
+			} else {
+				printf(
+					'<a href="%1$s" class="button '.(($level == 'high') ? 'button-primary ' : '').'button-large">%2$s</a>',
+					wp_nonce_url(admin_url(sprintf(
+						'admin.php?page=%1$s&action=%2$s' . ($referer ? '&_wp_http_referer=%3$s' : NULL),
+						$_REQUEST['page'],
+						$action,
+						urlencode(wp_unslash($_SERVER['REQUEST_URI']))
+					)), 'opcache_ctrl'),
+					$label
+				);
+			}
 		}
 
 		make_button(esc_html__('Reset', 'opcache'), 'reset', true, 'high');
