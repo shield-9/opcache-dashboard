@@ -87,6 +87,11 @@ If you're in supported environment, please create [pull request](https://github.
 
 == Changelog ==
 
+= 0.2.4 =
+* Small Bug fix.
+* More on [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.4).
+* [`git diff 0.2.3...0.2.4`](https://github.com/shield-9/opcache-dashboard/compare/0.2.3...0.2.4)
+
 = 0.2.3 =
 * WordPress Bug Fix: Reset all caches after updating WordPress Core/Plugins/Themes.
 * github-buttons is updated.
