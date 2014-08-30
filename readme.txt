@@ -3,7 +3,7 @@ Contributors: extendwings, headonfire,
 Donate link: http://www.extendwings.com/donate/
 Tags: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 Requires at least: 3.8
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: 0.2.4
 License: AGPLv3 or later
 License URI: http://www.gnu.org/licenses/agpl.txt
