@@ -338,15 +338,8 @@ class OPcache_dashboard {
 		}
 		$list_table = new OPcache_List_Table( $config );
 		$list_table->prepare_items();
-		?>
-		<div class="wrap">
-			<h2><?php _e('OPcache Configurations', 'opcache'); ?></h2>
-			<form method="get">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-				<?php $list_table->display() ?>
-			</form>
-		</div><!-- wrap -->
-		<?php
+
+		$this->load_view('admin-config.php', $list_table );
 	}
 
 	function render_admin_manual_page() {
