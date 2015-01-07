@@ -320,15 +320,8 @@ class OPcache_dashboard {
 		require_once( plugin_dir_path( __FILE__ ).'class.script-list-table.php');
 		$list_table = new OPcache_List_Table( $status['scripts'] );
 		$list_table->prepare_items();
-		?>
-		<div class="wrap">
-			<h2><?php _e('OPcache Scripts', 'opcache'); ?></h2>
-			<form method="get">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-				<?php $list_table->display() ?>
-			</form>
-		</div><!-- wrap -->
-		<?php
+
+		$this->load_view('admin-scripts.php', $list_table );
 	}
 
 	function render_admin_config_page() {
