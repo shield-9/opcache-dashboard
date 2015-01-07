@@ -2,6 +2,6 @@
 			<h2><?php _e('OPcache Scripts', 'opcache'); ?></h2>
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-				<?php $list_table->display() ?>
+				<?php $data->display() ?>
 			</form>
 		</div><!-- wrap -->
