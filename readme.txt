@@ -3,8 +3,8 @@ Contributors: extendwings, headonfire,
 Donate link: http://www.extendwings.com/donate/
 Tags: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 0.2.4
+Tested up to: 4.1
+Stable tag: 0.3.0
 License: AGPLv3 or later
 License URI: http://www.gnu.org/licenses/agpl.txt
 
@@ -85,6 +85,11 @@ If you're in supported environment, please create [pull request](https://github.
 
 == Changelog ==
 
+= 0.3.0 =
+* Dashboard Graph Widget Added.
+* More on [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.3.0).
+* [`git diff 0.2.4...0.3.0`](https://github.com/shield-9/opcache-dashboard/compare/0.2.4...0.3.0)
+
 = 0.2.4 =
 * Small Bug fix.
 * More on [GitHub](https://github.com/shield-9/opcache-dashboard/releases/tag/0.2.4).
@@ -122,6 +127,15 @@ If you're in supported environment, please create [pull request](https://github.
 * Initial Beta Release
 
 == Upgrade Notice ==
+
+= 0.3.0 =
+* None
+
+= 0.2.4 =
+* None
+
+= 0.2.3 =
+* None
 
 = 0.2.2 =
 * None
