@@ -191,7 +191,7 @@ class OPcache_dashboard {
 	}
 
 	function load_view( $template, $data = array() ) {
-		$views_dir = plugin_dir_url( __FILE__ ) . 'views/';
+		$views_dir = plugin_dir_path( __FILE__ ) . 'views/';
 		if( file_exists( $views_dir . $template ) ) {
 			require_once( $views_dir . $template );
 			return true;
