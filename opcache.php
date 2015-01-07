@@ -62,6 +62,8 @@ class OPcache_dashboard {
 		add_action('wp_loaded', array( &$this, 'register_assets') );
 		add_filter('plugin_row_meta', array( &$this, 'plugin_row_meta'), 10, 2);
 
+		add_action('wp_dashboard_setup', array( &$this, 'add_dashboard_widgets') );
+
 		// Reset all cache when Upgrader Process complete
 		add_action('upgrader_process_complete', array( &$this, 'version_up_reset'), 10, 2);
 	}
@@ -382,6 +384,21 @@ class OPcache_dashboard {
 		}
 
 		$this->load_view('admin-manual.php');
+	}
+
+	function add_dashboard_widgets() {
+		wp_add_dashboard_widget(
+			'opcache_graph',				// slug
+			esc_html__('OPcahce Status', 'opcache'),	// title
+			array( &$this, 'render_dashboard_widget')	// display function
+		);
+	}
+
+	function render_dashboard_widget() {
+		$this->data['config'] = opcache_get_configuration();
+		$this->data['status'] = opcache_get_status(false);
+
+		$this->load_view('widgets/dashboard.php', $this->data );
 	}
 
 	static function plugin_textdomain() {
