@@ -123,7 +123,7 @@ class OPcache_dashboard {
 			__('OPcache', 'opcache'),		// menu_title
 			'manage_options',			// capability
 			'opcache',				// menu_slug
-			array( &$this, 'admin_page'),		// function
+			array( &$this, 'render_admin_page'),		// function
 			'dashicons-backup',			// icon_url
 			'3.14159265359'				// position
 		);
