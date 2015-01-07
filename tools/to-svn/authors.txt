@@ -1,2 +1,0 @@
-plugin-master = Daisuke Takahashi<daisuke@extendwings.com>
-extendwings = shield-9 <galaxy.s.two.wimax@gmail.com>

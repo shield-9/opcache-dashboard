@@ -1,5 +1,0 @@
-1. Run `./tools/to-svn/deploy-plugin.sh`. That's all, thanks to sudar.
-
-[If I failed to SVN commit]
-1. Run `git tag -d {version number}`
-2. Run `git push origin :refs/tags/{version number}`
