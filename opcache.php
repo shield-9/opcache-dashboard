@@ -31,12 +31,20 @@ class OPcache_dashboard {
 	const PHP_URL = 'http://php.shield-9.org';
 
 	const VERSION = '0.2.5-dev';
-	
+
+	static $PLUGIN_URL;
+	static $PLUGIN_DIR;
+	static $PLUGIN_FILE;
+
 	private $data;
 	private $hooks;
 
 	static function init() {
 		if( !self::$instance ) {
+			self::$PLUGIN_URL = plugin_dir_url( __FILE__ );
+			self::$PLUGIN_DIR = plugin_dir_path( __FILE__ );
+			self::$PLUGIN_FILE = __FILE__;
+
 			if( did_action('plugins_loaded') )
 				self::plugin_textdomain();
 			else
@@ -77,7 +85,7 @@ class OPcache_dashboard {
 			if( !wp_script_is('d3js', 'registered') )
 				wp_register_script(
 					'd3js',
-					plugin_dir_url( __FILE__ ) . 'js/d3.min.js',
+					self::$PLUGIN_URL . 'js/d3.min.js',
 					false,
 					'3.4.4'
 				);
@@ -85,7 +93,7 @@ class OPcache_dashboard {
 			if( !wp_script_is('opcache', 'registered'))
 				wp_register_script(
 					'opcache',
-					plugin_dir_url( __FILE__ ) . 'js/chart.js',
+					self::$PLUGIN_URL . 'js/chart.js',
 					array('jquery', 'd3js'),
 					self::VERSION,
 					true
@@ -94,7 +102,7 @@ class OPcache_dashboard {
 			if( !wp_script_is('jquery-center', 'registered') )
 				wp_register_script(
 					'jquery-center',
-					plugin_dir_url( __FILE__ ) . 'js/jquery.center.min.js',
+					self::$PLUGIN_URL . 'js/jquery.center.min.js',
 					array('jquery'),
 					'1.1.1'
 				);
@@ -102,7 +110,7 @@ class OPcache_dashboard {
 			if( !wp_style_is('opcache', 'registered') )
 				wp_register_style(
 					'opcache',
-					plugin_dir_url( __FILE__ ) . 'css/style.css',
+					self::$PLUGIN_URL . 'css/style.css',
 					false,
 					self::VERSION
 				);
@@ -110,7 +118,7 @@ class OPcache_dashboard {
 			if( !wp_style_is('genericons', 'registered') )
 				wp_register_style(
 					'genericons',
-					plugin_dir_url( __FILE__ ) . 'css/genericons.css',
+					self::$PLUGIN_URL . 'css/genericons.css',
 					false,
 					'3.0.3'
 				);
@@ -191,7 +199,7 @@ class OPcache_dashboard {
 	}
 
 	function load_view( $template, $data = array() ) {
-		$views_dir = plugin_dir_path( __FILE__ ) . 'views/';
+		$views_dir = self::$PLUGIN_DIR . 'views/';
 		if( file_exists( $views_dir . $template ) ) {
 			require_once( $views_dir . $template );
 			return true;
@@ -291,7 +299,7 @@ class OPcache_dashboard {
 	function render_admin_status_page() {
 		$raw_status = opcache_get_status( false );
 
-		require_once( plugin_dir_path( __FILE__ ).'class.status-list-table.php');
+		require_once( self::$PLUGIN_DIR . 'class.status-list-table.php');
 		foreach( $raw_status as $key => $value ) {
 			if( $key === 'scripts')
 				continue;
@@ -317,7 +325,7 @@ class OPcache_dashboard {
 	function render_admin_scripts_page() {
 		$status = opcache_get_status();
 
-		require_once( plugin_dir_path( __FILE__ ).'class.script-list-table.php');
+		require_once( self::$PLUGIN_DIR . 'class.script-list-table.php');
 		$list_table = new OPcache_List_Table( $status['scripts'] );
 		$list_table->prepare_items();
 
@@ -327,7 +335,7 @@ class OPcache_dashboard {
 	function render_admin_config_page() {
 		$raw_config = opcache_get_configuration();
 
-		require_once( plugin_dir_path( __FILE__ ).'class.config-list-table.php');
+		require_once( self::$PLUGIN_DIR . 'class.config-list-table.php');
 		foreach( $raw_config as $key => $value ) {
 			if( is_array( $value ) ) {
 				foreach( $value as $k => $v ) {

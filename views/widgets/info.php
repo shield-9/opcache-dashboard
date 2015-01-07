@@ -8,8 +8,8 @@
 						esc_html__('This software is licensed under %s.', 'opcache'),
 						sprintf(
 							'<a href="%1$s"><img id="agpl-logo" src="%2$s" alt="GNU AFFERO GENERAL PUBLIC LICENSE, Version 3"></a>',
-							esc_url( plugin_dir_url( __FILE__ ) . 'LICENSE'),
-							esc_url( plugin_dir_url( __FILE__ ) . 'images/agpl.svg')
+							esc_url( OPcache_dashboard::$PLUGIN_URL . 'LICENSE'),
+							esc_url( OPcache_dashboard::$PLUGIN_URL . 'images/agpl.svg')
 						)
 					); ?>
 			</div>
@@ -45,12 +45,12 @@
 			<div class="info-widget">
 				<h4>
 					<span class="genericon genericon-github"></span>
-					<img id="github-logo" alt="GitHub Logo" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'images/github.svg'); ?>">
+					<img id="github-logo" alt="GitHub Logo" src="<?php echo esc_url( OPcache_dashboard::$PLUGIN_URL . 'images/github.svg'); ?>">
 				</h4>
 				<p>
-					<iframe class="github-button" seamless src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=watch&count=true'); ?>" style="width: 85px;"></iframe>
-					<iframe class="github-button" seamless src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=fork&count=true'); ?>" style="width: 85px;"></iframe>
-					<iframe class="github-button" seamless src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'github-btn.html?user=shield-9&type=follow'); ?>" style="width: 135px;"></iframe>
+					<iframe class="github-button" seamless src="<?php echo esc_url( OPcache_dashboard::$PLUGIN_URL . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=watch&count=true'); ?>" style="width: 85px;"></iframe>
+					<iframe class="github-button" seamless src="<?php echo esc_url( OPcache_dashboard::$PLUGIN_URL . 'github-btn.html?user=shield-9&repo=opcache-dashboard&type=fork&count=true'); ?>" style="width: 85px;"></iframe>
+					<iframe class="github-button" seamless src="<?php echo esc_url( OPcache_dashboard::$PLUGIN_URL . 'github-btn.html?user=shield-9&type=follow'); ?>" style="width: 135px;"></iframe>
 			</div>
 			<div class="info-widget">
 				<h4><?php esc_html_e('Feedback', 'opcache'); ?></h4>
