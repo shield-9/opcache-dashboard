@@ -389,7 +389,7 @@ class OPcache_dashboard {
 	function add_dashboard_widgets() {
 		wp_add_dashboard_widget(
 			'opcache_graph',				// slug
-			esc_html__('OPcahce Status', 'opcache'),	// title
+			esc_html__('OPcache Status', 'opcache'),	// title
 			array( &$this, 'render_dashboard_widget')	// display function
 		);
 	}
