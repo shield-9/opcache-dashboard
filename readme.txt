@@ -1,9 +1,9 @@
 === OPcache Dashboard ===
 Contributors: extendwings, headonfire,
-Donate link: http://www.extendwings.com/donate/
+Donate link: https://www.extendwings.com/donate/
 Tags: PHP, Zend, OPcache, monitor, stat, stats, status, server, cache, dashboard
 Requires at least: 3.8
-Tested up to: 4.1
+Tested up to: 4.4
 Stable tag: 0.3.1
 License: AGPLv3 or later
 License URI: http://www.gnu.org/licenses/agpl.txt
@@ -27,7 +27,7 @@ This plugin reset all cache after upgrading so that you don't have to see "Pleas
 For implementing this plugin, I referred to [OPcache Dashboard](https://github.com/carlosbuenosvinos/opcache-dashboard)([@buenosvinos](https://twitter.com/buenosvinos))
 
 ### License
-* Copyright (c) 2012-2014 [Daisuke Takahashi(Extend Wings)](http://www.extendwings.com/)
+* Copyright (c) 2012-2015 [Daisuke Takahashi(Extend Wings)](https://www.extendwings.com/)
 * Portions (c) 2010-2012 Web Online.
 * Unless otherwise stated, all files in this repo is licensed under *GNU AFFERO GENERAL PUBLIC LICENSE, Version 3*. See *LICENSE* file.
 
@@ -75,7 +75,7 @@ For implementing this plugin, I referred to [OPcache Dashboard](https://github.c
 == Frequently Asked Questions ==
 
 = This plugin is broken! Thanks for nothing! =
-First of all, we supports PHP 5.4+, MySQL 5.5+, WordPress 3.8+. Old software(vulnerable!) is not supported.
+First of all, we supports PHP 5.6+, MySQL 5.5+, WordPress 4.3+. Old software(vulnerable!) is not supported.
 If you're in supported environment, please create [pull request](https://github.com/shield-9/opcache-dashboard/compare/) or [issue](https://github.com/shield-9/opcache-dashboard/issues/new).
 
 == Screenshots ==
