@@ -177,7 +177,7 @@ class OPcache_List_Table extends WP_List_Table {
 			case 'directives.opcache.interned_strings_buffer':
 				return OPcache_dashboard::size($item['value']*1024*1024);
 			case 'directives.opcache.max_wasted_percentage':
-				return OPcache_dashboard::number_format($item['value']) . '%';
+				return sprintf( '%d%%', $item['value'] * 100);
 			default:
 				return $item['value'];
 		}
